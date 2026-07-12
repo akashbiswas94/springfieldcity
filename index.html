@@ -48,13 +48,14 @@ footer{padding:58px 0 28px;color:#a8bac5;background:var(--navy2)}.footergrid{dis
       <p>Tell us what matters to you. We will personalise the homepage, navigation, stories and next steps around your needs.</p>
       <form class="search" id="intentForm">
         <div class="searchbox">
-          <input id="intentInput" placeholder="For example: I want to invest in commercial property" autocomplete="off">
+          <input id="intentInput" placeholder="For example: I want to open a medical clinic or find commercial land" autocomplete="off">
           <button type="submit">Explore Springfield →</button>
         </div>
         <div class="suggestions">
           <button type="button" data-example="I want to invest in commercial property">Commercial investment</button>
           <button type="button" data-example="I am moving to Springfield with my family">Living in Springfield</button>
           <button type="button" data-example="I need to find schools and education options">Schools and education</button>
+          <button type="button" data-example="I want to open a medical clinic">Health and medical</button>
           <button type="button" data-example="What events are happening this weekend?">Events this weekend</button>
         </div>
         <div class="error" id="error"></div>
@@ -74,12 +75,583 @@ footer{padding:58px 0 28px;color:#a8bac5;background:var(--navy2)}.footergrid{dis
 <button class="launch" id="launch">Ask Springfield ✦</button>
 <section class="chat" id="chat"><div class="chathead"><img class="logo" src="springfield-logo.png" alt=""><div><strong>Springfield Concierge</strong><span>Demo assistant</span></div><button class="close" id="close">×</button></div><div class="messages" id="messages"><div class="msg bot">Hi, I’m the Springfield Concierge. What would you like to know?</div></div><div class="quick" id="quick"></div><form class="chatform" id="chatForm"><input id="chatInput" placeholder="Ask a question..."><button>Send</button></form></section>
 <script>
-const I={park:'https://commons.wikimedia.org/wiki/Special:FilePath/Robelle%20Domain%20Springfield%20Central%20Parklands.jpg?width=1800',parks:'https://commons.wikimedia.org/wiki/Special:FilePath/Robelle%20Domain%20parklands%20Springfield%20Central.jpg?width=1200',street:'https://commons.wikimedia.org/wiki/Special:FilePath/Karamea%20Avenue,%20Springfield,%20Queensland.jpg?width=1200',tower:'https://commons.wikimedia.org/wiki/Special:FilePath/145%20Sinnathamby%20Boulevard%20Springfield%20Central.jpg?width=1500',lagoon:'https://commons.wikimedia.org/wiki/Special:FilePath/Orion%20Lagoon.jpg?width=1400',play:'https://commons.wikimedia.org/wiki/Special:FilePath/Orion%20playground.jpg?width=1200',station:'https://commons.wikimedia.org/wiki/Special:FilePath/Springfield%20Central%20Railway%20Station,%20Queensland,%20December%202013.JPG?width=1200',college:'https://commons.wikimedia.org/wiki/Special:FilePath/The%20Springfield%20College%20war%20memorial.jpg?width=1200'};
-const K={investment:{s:['invest','investment','commercial','business','development','property','land','office','retail','industrial','infrastructure'],w:['growth','opportunity','precinct','project']},living:{s:['live','living','move','moving','home','house','residential','neighbourhood','family','rent','community','lifestyle'],w:['transport','parks','shopping','healthcare']},education:{s:['school','schools','education','university','college','childcare','training','course','study','student','learning'],w:['children','campus','degree']},events:{s:['event','events','weekend','festival','concert','activity','things to do','visit','dining','restaurant','entertainment'],w:['today','tomorrow','food','music','experience']}};
-const C={general:{accent:'#fecb00',soft:'#ffe99a',sub:'Future Ready',img:I.park,eye:'Greater Springfield, Queensland',title:'A city built for what comes next.',text:'Explore investment, community, education, lifestyle and visitor opportunities across one of Australia’s leading master-planned cities.',tags:['Investment','Living','Education','Events'],primary:'Explore Springfield',secondary:'Ask the City Concierge',nav:['Discover','Precincts','Innovation','Living','What’s On','Contact'],feye:'Discover Springfield',ftitle:'One city. Many opportunities.',ftext:'A clear and engaging way to explore the city based on what matters most to each visitor.',cards:[['Investment','Business and commercial opportunities','Explore precincts, commercial sites, growth and major projects.',I.tower],['Living','Connected communities and lifestyle','Discover homes, neighbourhoods, parks, transport and services.',I.parks],['Education','Learning at every stage','Find schools, universities, childcare and training opportunities.',I.college]],q:['What investment opportunities are available?','What is Springfield known for?','What can families do here?'],ct:'Discover what Springfield can offer.',cb:'Connect with the team for investment, business, community or development enquiries.',ci:I.street},investment:{accent:'#fecb00',soft:'#ffe99a',sub:'Investment and Growth',img:I.tower,eye:'Invest in Greater Springfield',title:'Build your future in a city designed for growth.',text:'Explore commercial land, business precincts, infrastructure projects and long-term development opportunities.',tags:['Commercial land','Business growth','Development sites','Infrastructure'],primary:'Explore investment opportunities',secondary:'Speak with the investment team',nav:['Opportunities','Commercial Land','Precincts','Infrastructure','Growth','Contact'],feye:'Investment opportunities',ftitle:'Built for serious long-term investment.',ftext:'Clear information for investors, operators and decision-makers looking for growth opportunities.',cards:[['Commercial','Commercial land and property','Explore major sites, business locations and future development opportunities.',I.tower],['Connectivity','Infrastructure and transport','Discover the road, rail and digital infrastructure supporting growth.',I.station],['Precincts','Health, education and innovation','Find opportunities across Springfield’s connected economic precincts.',I.college]],q:['What commercial land is available?','Where are the main business precincts?','What projects are planned?'],ct:'Bring your next opportunity to Springfield.',cb:'Connect with the investment team to discuss commercial sites, partnerships and future development.',ci:I.tower},living:{accent:'#55d6a2',soft:'#b8f4dc',sub:'Living and Community',img:I.park,eye:'Live in Greater Springfield',title:'A connected community built for everyday life.',text:'Explore homes, neighbourhoods, transport, parks, healthcare, shopping and community services.',tags:['Neighbourhoods','Transport','Parks','Community'],primary:'Explore living in Springfield',secondary:'View neighbourhoods',nav:['Neighbourhoods','Transport','Parks','Healthcare','Community','Contact'],feye:'Living in Springfield',ftitle:'Everything needed for a connected lifestyle.',ftext:'A welcoming view of the places, services and experiences that shape everyday life.',cards:[['Residential','Homes and neighbourhoods','Explore established communities and new residential opportunities.',I.street],['Lifestyle','Parks and open spaces','Discover recreation, green spaces and family-friendly places.',I.parks],['Transport','Connected by road and rail','Find practical transport information for work, study and daily life.',I.station]],q:['What is it like to live in Springfield?','What transport is available?','Where are the parks?'],ct:'Picture your life in Springfield.',cb:'Explore neighbourhoods, services and lifestyle opportunities across the city.',ci:I.parks},education:{accent:'#a58cff',soft:'#ded5ff',sub:'Schools and Education',img:I.college,eye:'Learn in Greater Springfield',title:'Education opportunities for every stage of life.',text:'Discover schools, universities, childcare, vocational training and lifelong learning opportunities.',tags:['Schools','Universities','Childcare','Training'],primary:'Explore education',secondary:'Find nearby schools',nav:['Schools','Universities','Childcare','Training','Student Life','Contact'],feye:'Schools and education',ftitle:'Learning opportunities for every generation.',ftext:'A simple way for families, students and partners to find the right education information.',cards:[['Schools','Primary and secondary education','Find education options across Springfield’s growing communities.',I.college],['Higher education','Universities and tertiary study','Explore higher education, research and professional pathways.',I.tower],['Training','Skills and vocational learning','Discover training providers, courses and workforce development.',I.station]],q:['What schools are available?','Are there universities nearby?','What childcare options are available?'],ct:'Find the right learning pathway.',cb:'Explore education opportunities from early learning through to higher education and training.',ci:I.college},events:{accent:'#ff7d8b',soft:'#ffd1d7',sub:'Events and Experiences',img:I.lagoon,eye:'Experience Greater Springfield',title:'Discover what is happening across Springfield.',text:'Find events, dining, attractions, entertainment and family-friendly activities.',tags:['Upcoming events','Things to do','Dining','Family activities'],primary:'View upcoming events',secondary:'Explore places to visit',nav:['Events','Things to Do','Dining','Family','Getting Here','Contact'],feye:'Events and experiences',ftitle:'Find something worth experiencing.',ftext:'A more visual way to plan a visit, discover local experiences and see what is happening.',cards:[['Events','Upcoming events and activities','Discover festivals, community events and local experiences.',I.lagoon],['Family','Family-friendly places','Explore playgrounds, open spaces and activities for all ages.',I.play],['Dining','Food, cafés and entertainment','Find places to eat, meet and enjoy Springfield’s city life.',I.parks]],q:['What events are coming up?','What can families do this weekend?','Where can I eat?'],ct:'Plan your Springfield experience.',cb:'Explore current events, family activities, dining and visitor information.',ci:I.play}};
-const form=document.getElementById('intentForm'),input=document.getElementById('intentInput'),err=document.getElementById('error'),intent=document.getElementById('intent');document.querySelectorAll('[data-example]').forEach(b=>b.onclick=()=>{input.value=b.dataset.example;input.focus()});form.onsubmit=e=>{e.preventDefault();const v=input.value.trim();if(v.length<3){err.textContent='Please tell us a little more about what you are looking for.';return}const k=detect(v);if(!k){err.textContent='Try mentioning investment, living, schools or events.';return}localStorage.setItem('springfield_intent',k);localStorage.setItem('springfield_query',v);apply(k,v);closeIntent()};document.getElementById('skip').onclick=()=>{apply('general','');closeIntent()};document.getElementById('change').onclick=()=>{intent.hidden=false;requestAnimationFrame(()=>intent.classList.remove('hide'));input.focus()};function detect(t){const n=t.toLowerCase().replace(/[^\w\s']/g,' ');const s={};Object.entries(K).forEach(([k,g])=>{s[k]=0;g.s.forEach(x=>{if(n.includes(x))s[k]+=4});g.w.forEach(x=>{if(n.includes(x))s[k]++})});const a=Object.entries(s).sort((x,y)=>y[1]-x[1]);return a[0][1]?a[0][0]:null}function closeIntent(){intent.classList.add('hide');setTimeout(()=>intent.hidden=true,500)}
-function apply(k,q=''){const d=C[k]||C.general;document.documentElement.style.setProperty('--accent',d.accent);document.documentElement.style.setProperty('--accentSoft',d.soft);subtitle.textContent=d.sub;heroBg.style.backgroundImage=`url('${d.img}')`;heroEyebrow.textContent=d.eye;heroTitle.textContent=d.title;heroText.textContent=d.text;primary.textContent=d.primary;secondary.textContent=d.secondary;tags.innerHTML='';if(q){const x=document.createElement('span');x.textContent='Matched to: '+q;tags.appendChild(x)}d.tags.forEach(t=>{const x=document.createElement('span');x.textContent=t;tags.appendChild(x)});links.innerHTML='';d.nav.forEach((n,i)=>{const a=document.createElement('a');a.textContent=n;a.href=i===d.nav.length-1?'#contact':'#featured';if(i<3)a.className='priority';links.appendChild(a)});fEye.textContent=d.feye;fTitle.textContent=d.ftitle;fText.textContent=d.ftext;cards.innerHTML='';d.cards.forEach(c=>{const a=document.createElement('article');a.className='card';a.innerHTML=`<div class='cardimg'><img src='${c[3]}' alt='${c[1]}'></div><div class='cardbody'><span class='tag'>${c[0]}</span><h3>${c[1]}</h3><p>${c[2]}</p><a class='learn' href='#'>Learn more →</a></div>`;cards.appendChild(a)});ctaTitle.textContent=d.ct;ctaText.textContent=d.cb;document.querySelector('.cta').style.backgroundImage=`url('${d.ci}')`;quick.innerHTML='';d.q.forEach(x=>{const b=document.createElement('button');b.type='button';b.textContent=x;b.onclick=()=>send(x);quick.appendChild(b)})}apply(localStorage.getItem('springfield_intent')||'general',localStorage.getItem('springfield_query')||'');
-document.getElementById('mobile').onclick=()=>links.classList.toggle('open');const chat=document.getElementById('chat'),messages=document.getElementById('messages');document.getElementById('launch').onclick=()=>chat.classList.add('open');document.getElementById('close').onclick=()=>chat.classList.remove('open');document.getElementById('chatForm').onsubmit=e=>{e.preventDefault();const i=document.getElementById('chatInput');send(i.value);i.value=''};function send(t){const v=t.trim();if(!v)return;add(v,'user');setTimeout(()=>add(answer(v),'bot'),400)}function add(t,c){const d=document.createElement('div');d.className='msg '+c;d.textContent=t;messages.appendChild(d);messages.scrollTop=messages.scrollHeight}function answer(t){const q=t.toLowerCase();if(q.includes('school')||q.includes('education')||q.includes('university'))return 'Springfield offers schools, higher education, childcare and training options. A live concierge could show verified providers, locations and contacts.';if(q.includes('invest')||q.includes('commercial')||q.includes('business')||q.includes('land'))return 'Springfield includes commercial, health, education and technology precincts. A live system could guide investors to current opportunities and approved contacts.';if(q.includes('event')||q.includes('weekend')||q.includes('dining')||q.includes('visit'))return 'A live concierge could show current events, dining, recreation and visitor information from approved Springfield sources.';if(q.includes('live')||q.includes('home')||q.includes('transport')||q.includes('park'))return 'Springfield offers connected neighbourhoods, transport, parks, shopping, healthcare and community services.';return 'In the live version, I would answer using approved Springfield website content, reports and project information.'}
+const images = {
+    parklands: 'https://commons.wikimedia.org/wiki/Special:FilePath/Robelle%20Domain%20Springfield%20Central%20Parklands.jpg?width=1800',
+    robelleDomain: 'https://commons.wikimedia.org/wiki/Special:FilePath/Robelle%20Domain%20parklands%20Springfield%20Central.jpg?width=1200',
+    residentialStreet: 'https://commons.wikimedia.org/wiki/Special:FilePath/Karamea%20Avenue,%20Springfield,%20Queensland.jpg?width=1200',
+    springfieldTower: 'https://commons.wikimedia.org/wiki/Special:FilePath/145%20Sinnathamby%20Boulevard%20Springfield%20Central.jpg?width=1500',
+    orionLagoon: 'https://commons.wikimedia.org/wiki/Special:FilePath/Orion%20Lagoon.jpg?width=1400',
+    playground: 'https://commons.wikimedia.org/wiki/Special:FilePath/Orion%20playground.jpg?width=1200',
+    railwayStation: 'https://commons.wikimedia.org/wiki/Special:FilePath/Springfield%20Central%20Railway%20Station,%20Queensland,%20December%202013.JPG?width=1200',
+    education: 'https://commons.wikimedia.org/wiki/Special:FilePath/The%20Springfield%20College%20war%20memorial.jpg?width=1200',
+};
+
+/*
+ * Each visitor request is scored against these groups.
+ * Strong terms receive 5 points and supporting terms receive 2 points.
+ * Keeping the lists here makes the demo easy to maintain without a database.
+ */
+const keywordGroups = {
+    investment: {
+        strong: [
+            'invest', 'investment', 'investor', 'investors',
+            'commercial', 'commercial property', 'commercial land',
+            'commercial space', 'business', 'businesses',
+            'business opportunity', 'business opportunities',
+            'company', 'companies', 'enterprise', 'startup', 'start-up',
+            'franchise', 'office', 'office space', 'warehouse',
+            'logistics', 'industrial', 'industrial land', 'retail space',
+            'property development', 'developer', 'development site',
+            'development sites', 'economic growth', 'growth corridor',
+            'data centre', 'technology precinct', 'innovation precinct',
+            'infrastructure project', 'partnership', 'partnership opportunity',
+            'open a business', 'set up a business', 'expand my business',
+        ],
+        supporting: [
+            'land', 'property', 'growth', 'opportunity', 'opportunities',
+            'project', 'projects', 'precinct', 'precincts', 'workforce',
+            'employment', 'industry', 'market', 'expansion', 'funding',
+            'economy', 'tenant', 'leasing', 'lease',
+        ],
+    },
+
+    living: {
+        strong: [
+            'live', 'living', 'move', 'moving', 'relocate', 'relocation',
+            'home', 'homes', 'house', 'houses', 'buy a home',
+            'buying a home', 'rent', 'rental', 'residential', 'resident',
+            'residents', 'neighbourhood', 'neighbourhoods', 'family',
+            'families', 'family life', 'lifestyle', 'community', 'suburb',
+            'safe area', 'child friendly', 'retirement living',
+            'senior living', 'aged care', 'parks', 'parklands',
+            'shopping centre', 'public transport', 'train station',
+            'bus service', 'property to buy', 'place to live',
+        ],
+        supporting: [
+            'transport', 'train', 'bus', 'shopping', 'healthcare',
+            'hospital', 'services', 'housing', 'local', 'nearby',
+            'amenities', 'recreation', 'commute', 'community facilities',
+            'playground', 'walking tracks',
+        ],
+    },
+
+    education: {
+        strong: [
+            'school', 'schools', 'primary school', 'secondary school',
+            'high school', 'private school', 'public school', 'education',
+            'educational', 'university', 'universities', 'college',
+            'colleges', 'childcare', 'daycare', 'kindergarten',
+            'early learning', 'training', 'vocational training', 'tafe',
+            'course', 'courses', 'study', 'student', 'students', 'learning',
+            'campus', 'degree', 'scholarship', 'research program',
+            'education precinct', 'enrolment', 'enrollment',
+            'school for my child', 'school for my children',
+        ],
+        supporting: [
+            'children', 'child', 'teacher', 'teachers', 'qualification',
+            'qualifications', 'graduate', 'graduates', 'academic',
+            'study options', 'learning pathway', 'career pathway',
+            'fees', 'admission', 'admissions',
+        ],
+    },
+
+    health: {
+        strong: [
+            'health', 'healthcare', 'health city', 'hospital', 'hospitals',
+            'medical', 'medical centre', 'medical center', 'medical clinic',
+            'clinic', 'clinics', 'doctor', 'doctors', 'specialist',
+            'specialists', 'patient', 'patients', 'pharmacy', 'pharmacies',
+            'dentist', 'dental', 'mental health', 'aged care',
+            'allied health', 'health research', 'medical research',
+            'medical business', 'medical practice', 'open a clinic',
+            'physiotherapy', 'physio', 'psychologist', 'general practitioner',
+            'gp clinic', 'emergency department',
+        ],
+        supporting: [
+            'care', 'wellbeing', 'wellness', 'treatment', 'health services',
+            'medical services', 'research', 'nurse', 'nursing', 'therapy',
+            'support services', 'appointment', 'appointments',
+        ],
+    },
+
+    events: {
+        strong: [
+            'event', 'events', 'upcoming events', 'festival', 'festivals',
+            'concert', 'concerts', 'weekend', 'this weekend',
+            'things to do', 'activity', 'activities', 'family activities',
+            'family event', 'community event', 'attraction', 'attractions',
+            'tourism', 'tourist', 'visit', 'visitor', 'places to visit',
+            'entertainment', 'music', 'food', 'restaurant', 'restaurants',
+            'cafe', 'cafes', 'dining', 'nightlife', 'sport', 'sports',
+            'sporting event', 'market', 'markets', 'what is happening',
+            'where to eat', 'day out',
+        ],
+        supporting: [
+            'today', 'tomorrow', 'show', 'performance', 'experience',
+            'experiences', 'fun', 'family day', 'outing', 'what is on',
+            "what's on", 'calendar', 'tickets',
+        ],
+    },
+};
+
+const pageContent = {
+    general: {
+        accent: '#fecb00',
+        accentSoft: '#ffe99a',
+        subtitle: 'Future Ready',
+        heroImage: images.parklands,
+        heroEyebrow: 'Greater Springfield, Queensland',
+        heroTitle: 'A city built for what comes next.',
+        heroDescription: 'Explore investment, community, education, healthcare, lifestyle and visitor opportunities across one of Australia’s leading master-planned cities.',
+        tags: ['Investment', 'Living', 'Education', 'Health', 'Events'],
+        primaryAction: 'Explore Springfield',
+        secondaryAction: 'Ask the City Concierge',
+        navigation: ['Discover', 'Precincts', 'Innovation', 'Living', 'What’s On', 'Contact'],
+        featuredEyebrow: 'Discover Springfield',
+        featuredTitle: 'One city. Many opportunities.',
+        featuredDescription: 'A clear and engaging way to explore the city based on what matters most to each visitor.',
+        cards: [
+            { tag: 'Investment', title: 'Business and commercial opportunities', description: 'Explore precincts, commercial sites, growth and major projects.', image: images.springfieldTower },
+            { tag: 'Living', title: 'Connected communities and lifestyle', description: 'Discover homes, neighbourhoods, parks, transport and services.', image: images.robelleDomain },
+            { tag: 'Education', title: 'Learning at every stage', description: 'Find schools, universities, childcare and training opportunities.', image: images.education },
+        ],
+        questions: ['What investment opportunities are available?', 'What is Springfield known for?', 'What can families do here?'],
+        contactTitle: 'Discover what Springfield can offer.',
+        contactDescription: 'Connect with the team for investment, business, community or development enquiries.',
+        contactImage: images.residentialStreet,
+    },
+
+    investment: {
+        accent: '#fecb00',
+        accentSoft: '#ffe99a',
+        subtitle: 'Investment and Growth',
+        heroImage: images.springfieldTower,
+        heroEyebrow: 'Invest in Greater Springfield',
+        heroTitle: 'Build your future in a city designed for growth.',
+        heroDescription: 'Explore commercial land, business precincts, infrastructure projects and long-term development opportunities.',
+        tags: ['Commercial land', 'Business growth', 'Development sites', 'Infrastructure'],
+        primaryAction: 'Explore investment opportunities',
+        secondaryAction: 'Speak with the investment team',
+        navigation: ['Opportunities', 'Commercial Land', 'Precincts', 'Infrastructure', 'Growth', 'Contact'],
+        featuredEyebrow: 'Investment opportunities',
+        featuredTitle: 'Built for serious long-term investment.',
+        featuredDescription: 'Clear information for investors, operators and decision-makers looking for growth opportunities.',
+        cards: [
+            { tag: 'Commercial', title: 'Commercial land and property', description: 'Explore major sites, business locations and future development opportunities.', image: images.springfieldTower },
+            { tag: 'Connectivity', title: 'Infrastructure and transport', description: 'Discover the road, rail and digital infrastructure supporting growth.', image: images.railwayStation },
+            { tag: 'Precincts', title: 'Health, education and innovation', description: 'Find opportunities across Springfield’s connected economic precincts.', image: images.education },
+        ],
+        questions: ['What commercial land is available?', 'Where are the main business precincts?', 'What projects are planned?'],
+        contactTitle: 'Bring your next opportunity to Springfield.',
+        contactDescription: 'Connect with the investment team to discuss commercial sites, partnerships and future development.',
+        contactImage: images.springfieldTower,
+    },
+
+    living: {
+        accent: '#55d6a2',
+        accentSoft: '#b8f4dc',
+        subtitle: 'Living and Community',
+        heroImage: images.parklands,
+        heroEyebrow: 'Live in Greater Springfield',
+        heroTitle: 'A connected community built for everyday life.',
+        heroDescription: 'Explore homes, neighbourhoods, transport, parks, healthcare, shopping and community services.',
+        tags: ['Neighbourhoods', 'Transport', 'Parks', 'Community'],
+        primaryAction: 'Explore living in Springfield',
+        secondaryAction: 'View neighbourhoods',
+        navigation: ['Neighbourhoods', 'Transport', 'Parks', 'Healthcare', 'Community', 'Contact'],
+        featuredEyebrow: 'Living in Springfield',
+        featuredTitle: 'Everything needed for a connected lifestyle.',
+        featuredDescription: 'A welcoming view of the places, services and experiences that shape everyday life.',
+        cards: [
+            { tag: 'Residential', title: 'Homes and neighbourhoods', description: 'Explore established communities and new residential opportunities.', image: images.residentialStreet },
+            { tag: 'Lifestyle', title: 'Parks and open spaces', description: 'Discover recreation, green spaces and family-friendly places.', image: images.robelleDomain },
+            { tag: 'Transport', title: 'Connected by road and rail', description: 'Find practical transport information for work, study and daily life.', image: images.railwayStation },
+        ],
+        questions: ['What is it like to live in Springfield?', 'What transport is available?', 'Where are the parks?'],
+        contactTitle: 'Picture your life in Springfield.',
+        contactDescription: 'Explore neighbourhoods, services and lifestyle opportunities across the city.',
+        contactImage: images.robelleDomain,
+    },
+
+    education: {
+        accent: '#a58cff',
+        accentSoft: '#ded5ff',
+        subtitle: 'Schools and Education',
+        heroImage: images.education,
+        heroEyebrow: 'Learn in Greater Springfield',
+        heroTitle: 'Education opportunities for every stage of life.',
+        heroDescription: 'Discover schools, universities, childcare, vocational training and lifelong learning opportunities.',
+        tags: ['Schools', 'Universities', 'Childcare', 'Training'],
+        primaryAction: 'Explore education',
+        secondaryAction: 'Find nearby schools',
+        navigation: ['Schools', 'Universities', 'Childcare', 'Training', 'Student Life', 'Contact'],
+        featuredEyebrow: 'Schools and education',
+        featuredTitle: 'Learning opportunities for every generation.',
+        featuredDescription: 'A simple way for families, students and partners to find the right education information.',
+        cards: [
+            { tag: 'Schools', title: 'Primary and secondary education', description: 'Find education options across Springfield’s growing communities.', image: images.education },
+            { tag: 'Higher education', title: 'Universities and tertiary study', description: 'Explore higher education, research and professional pathways.', image: images.springfieldTower },
+            { tag: 'Training', title: 'Skills and vocational learning', description: 'Discover training providers, courses and workforce development.', image: images.railwayStation },
+        ],
+        questions: ['What schools are available?', 'Are there universities nearby?', 'What childcare options are available?'],
+        contactTitle: 'Find the right learning pathway.',
+        contactDescription: 'Explore education opportunities from early learning through to higher education and training.',
+        contactImage: images.education,
+    },
+
+    health: {
+        accent: '#45d2c4',
+        accentSoft: '#c9f6f1',
+        subtitle: 'Health and Wellbeing',
+        heroImage: images.springfieldTower,
+        heroEyebrow: 'Health City and Medical Innovation',
+        heroTitle: 'A growing health precinct built around care and innovation.',
+        heroDescription: 'Explore hospitals, medical services, allied health, research, aged care and opportunities for healthcare businesses.',
+        tags: ['Health City', 'Medical services', 'Research', 'Healthcare business'],
+        primaryAction: 'Explore Health City',
+        secondaryAction: 'Find health services',
+        navigation: ['Health City', 'Hospitals', 'Medical Services', 'Research', 'Healthcare Business', 'Contact'],
+        featuredEyebrow: 'Health and medical',
+        featuredTitle: 'Connected healthcare, research and opportunity.',
+        featuredDescription: 'A dedicated pathway for patients, practitioners, researchers and healthcare investors.',
+        cards: [
+            { tag: 'Healthcare', title: 'Hospitals and medical services', description: 'Discover healthcare providers, medical services and specialist care.', image: images.springfieldTower },
+            { tag: 'Research', title: 'Health research and innovation', description: 'Explore partnerships across medicine, education, technology and research.', image: images.education },
+            { tag: 'Business', title: 'Healthcare business opportunities', description: 'Find information for clinics, allied health providers and medical businesses.', image: images.residentialStreet },
+        ],
+        questions: ['Where can I find medical services?', 'What is Health City?', 'Can I open a medical clinic here?'],
+        contactTitle: 'Connect with Springfield’s health precinct.',
+        contactDescription: 'Explore care, research, partnership and healthcare business opportunities.',
+        contactImage: images.springfieldTower,
+    },
+
+    events: {
+        accent: '#ff7d8b',
+        accentSoft: '#ffd1d7',
+        subtitle: 'Events and Experiences',
+        heroImage: images.orionLagoon,
+        heroEyebrow: 'Experience Greater Springfield',
+        heroTitle: 'Discover what is happening across Springfield.',
+        heroDescription: 'Find events, dining, attractions, entertainment and family-friendly activities.',
+        tags: ['Upcoming events', 'Things to do', 'Dining', 'Family activities'],
+        primaryAction: 'View upcoming events',
+        secondaryAction: 'Explore places to visit',
+        navigation: ['Events', 'Things to Do', 'Dining', 'Family', 'Getting Here', 'Contact'],
+        featuredEyebrow: 'Events and experiences',
+        featuredTitle: 'Find something worth experiencing.',
+        featuredDescription: 'A more visual way to plan a visit, discover local experiences and see what is happening.',
+        cards: [
+            { tag: 'Events', title: 'Upcoming events and activities', description: 'Discover festivals, community events and local experiences.', image: images.orionLagoon },
+            { tag: 'Family', title: 'Family-friendly places', description: 'Explore playgrounds, open spaces and activities for all ages.', image: images.playground },
+            { tag: 'Dining', title: 'Food, cafés and entertainment', description: 'Find places to eat, meet and enjoy Springfield’s city life.', image: images.robelleDomain },
+        ],
+        questions: ['What events are coming up?', 'What can families do this weekend?', 'Where can I eat?'],
+        contactTitle: 'Plan your Springfield experience.',
+        contactDescription: 'Explore current events, family activities, dining and visitor information.',
+        contactImage: images.playground,
+    },
+};
+
+const intentScreen = document.getElementById('intent');
+const intentForm = document.getElementById('intentForm');
+const intentInput = document.getElementById('intentInput');
+const intentError = document.getElementById('error');
+const navigationLinks = document.getElementById('links');
+const chatPanel = document.getElementById('chat');
+const chatMessages = document.getElementById('messages');
+const chatSuggestions = document.getElementById('quick');
+
+document.querySelectorAll('[data-example]').forEach((button) => {
+    button.addEventListener('click', () => {
+        intentInput.value = button.dataset.example;
+        intentInput.focus();
+    });
+});
+
+intentForm.addEventListener('submit', (event) => {
+    event.preventDefault();
+
+    const visitorRequest = intentInput.value.trim();
+
+    if (visitorRequest.length < 3) {
+        intentError.textContent = 'Please tell us a little more about what you are looking for.';
+        return;
+    }
+
+    const result = detectVisitorIntent(visitorRequest);
+
+    if (!result.intent) {
+        intentError.textContent = 'Try mentioning investment, living, education, health or events.';
+        return;
+    }
+
+    intentError.textContent = '';
+    localStorage.setItem('springfield_intent', result.intent);
+    localStorage.setItem('springfield_query', visitorRequest);
+
+    applyPageContent(result.intent, visitorRequest, result.matchedTerms);
+    closeIntentScreen();
+});
+
+document.getElementById('skip').addEventListener('click', () => {
+    applyPageContent('general');
+    closeIntentScreen();
+});
+
+document.getElementById('change').addEventListener('click', () => {
+    intentScreen.hidden = false;
+    window.requestAnimationFrame(() => intentScreen.classList.remove('hide'));
+    intentInput.focus();
+});
+
+document.getElementById('mobile').addEventListener('click', () => {
+    navigationLinks.classList.toggle('open');
+});
+
+function normaliseText(value) {
+    return value
+        .toLowerCase()
+        .replace(/[^\p{L}\p{N}\s'-]/gu, ' ')
+        .replace(/\s+/g, ' ')
+        .trim();
+}
+
+function phraseExists(text, phrase) {
+    const normalisedPhrase = normaliseText(phrase);
+
+    if (normalisedPhrase.includes(' ')) {
+        return text.includes(normalisedPhrase);
+    }
+
+    return text.split(' ').includes(normalisedPhrase);
+}
+
+function detectVisitorIntent(visitorRequest) {
+    const normalisedRequest = normaliseText(visitorRequest);
+
+    const results = Object.entries(keywordGroups)
+        .map(([intent, group]) => {
+            let score = 0;
+            const matchedTerms = [];
+
+            group.strong.forEach((keyword) => {
+                if (phraseExists(normalisedRequest, keyword)) {
+                    score += 5;
+                    matchedTerms.push(keyword);
+                }
+            });
+
+            group.supporting.forEach((keyword) => {
+                if (phraseExists(normalisedRequest, keyword)) {
+                    score += 2;
+                    matchedTerms.push(keyword);
+                }
+            });
+
+            return { intent, score, matchedTerms };
+        })
+        .sort((first, second) => second.score - first.score);
+
+    const bestMatch = results[0];
+    const secondMatch = results[1];
+
+    if (!bestMatch || bestMatch.score === 0) {
+        return { intent: null, matchedTerms: [] };
+    }
+
+    if (secondMatch && bestMatch.score === secondMatch.score) {
+        const preferredIntent = resolveTiedIntent(normalisedRequest);
+        const preferredResult = results.find((item) => item.intent === preferredIntent);
+
+        if (preferredResult) {
+            return preferredResult;
+        }
+    }
+
+    return bestMatch;
+}
+
+function resolveTiedIntent(request) {
+    const priorityRules = [
+        { intent: 'health', phrases: ['medical clinic', 'open a clinic', 'health city', 'medical business', 'mental health'] },
+        { intent: 'investment', phrases: ['commercial land', 'commercial property', 'business opportunity', 'development site', 'office space'] },
+        { intent: 'education', phrases: ['primary school', 'secondary school', 'early learning', 'study options', 'education options'] },
+        { intent: 'living', phrases: ['move to springfield', 'living in springfield', 'buy a home', 'family life', 'retirement living'] },
+        { intent: 'events', phrases: ['things to do', 'this weekend', 'upcoming events', 'places to visit', "what's on"] },
+    ];
+
+    const match = priorityRules.find((rule) => {
+        return rule.phrases.some((phrase) => request.includes(normaliseText(phrase)));
+    });
+
+    return match ? match.intent : null;
+}
+
+function closeIntentScreen() {
+    intentScreen.classList.add('hide');
+    window.setTimeout(() => {
+        intentScreen.hidden = true;
+    }, 500);
+}
+
+function applyPageContent(audienceKey, visitorRequest = '', matchedTerms = []) {
+    const content = pageContent[audienceKey] || pageContent.general;
+
+    document.documentElement.style.setProperty('--accent', content.accent);
+    document.documentElement.style.setProperty('--accentSoft', content.accentSoft);
+
+    document.getElementById('subtitle').textContent = content.subtitle;
+    document.getElementById('heroBg').style.backgroundImage = `url('${content.heroImage}')`;
+    document.getElementById('heroEyebrow').textContent = content.heroEyebrow;
+    document.getElementById('heroTitle').textContent = content.heroTitle;
+    document.getElementById('heroText').textContent = content.heroDescription;
+    document.getElementById('primary').textContent = content.primaryAction;
+    document.getElementById('secondary').textContent = content.secondaryAction;
+
+    renderTags(content.tags, visitorRequest, matchedTerms);
+    renderNavigation(content.navigation);
+
+    document.getElementById('fEye').textContent = content.featuredEyebrow;
+    document.getElementById('fTitle').textContent = content.featuredTitle;
+    document.getElementById('fText').textContent = content.featuredDescription;
+
+    renderCards(content.cards);
+
+    document.getElementById('ctaTitle').textContent = content.contactTitle;
+    document.getElementById('ctaText').textContent = content.contactDescription;
+    document.querySelector('.cta').style.backgroundImage = `url('${content.contactImage}')`;
+
+    renderChatSuggestions(content.questions);
+}
+
+function renderTags(defaultTags, visitorRequest, matchedTerms) {
+    const container = document.getElementById('tags');
+    container.replaceChildren();
+
+    if (visitorRequest) {
+        const requestTag = document.createElement('span');
+        requestTag.textContent = `Matched to: ${visitorRequest}`;
+        container.appendChild(requestTag);
+    }
+
+    [...new Set(matchedTerms)].slice(0, 3).forEach((term) => {
+        const keywordTag = document.createElement('span');
+        keywordTag.textContent = `Keyword: ${term}`;
+        container.appendChild(keywordTag);
+    });
+
+    defaultTags.forEach((tag) => {
+        const element = document.createElement('span');
+        element.textContent = tag;
+        container.appendChild(element);
+    });
+}
+
+function renderNavigation(items) {
+    navigationLinks.replaceChildren();
+
+    items.forEach((item, index) => {
+        const link = document.createElement('a');
+        link.textContent = item;
+        link.href = index === items.length - 1 ? '#contact' : '#featured';
+
+        if (index < 3) {
+            link.classList.add('priority');
+        }
+
+        navigationLinks.appendChild(link);
+    });
+}
+
+function renderCards(cards) {
+    const grid = document.getElementById('cards');
+    grid.replaceChildren();
+
+    cards.forEach((card) => {
+        const article = document.createElement('article');
+        article.className = 'card';
+        article.innerHTML = `
+            <div class="cardimg">
+                <img src="${card.image}" alt="${card.title}">
+            </div>
+            <div class="cardbody">
+                <span class="tag">${card.tag}</span>
+                <h3>${card.title}</h3>
+                <p>${card.description}</p>
+                <a class="learn" href="#">Learn more →</a>
+            </div>
+        `;
+        grid.appendChild(article);
+    });
+}
+
+function renderChatSuggestions(questions) {
+    chatSuggestions.replaceChildren();
+
+    questions.forEach((question) => {
+        const button = document.createElement('button');
+        button.type = 'button';
+        button.textContent = question;
+        button.addEventListener('click', () => sendChatMessage(question));
+        chatSuggestions.appendChild(button);
+    });
+}
+
+const savedIntent = localStorage.getItem('springfield_intent');
+const savedQuery = localStorage.getItem('springfield_query') || '';
+applyPageContent(savedIntent || 'general', savedQuery);
+
+document.getElementById('launch').addEventListener('click', () => {
+    chatPanel.classList.add('open');
+});
+
+document.getElementById('close').addEventListener('click', () => {
+    chatPanel.classList.remove('open');
+});
+
+document.getElementById('chatForm').addEventListener('submit', (event) => {
+    event.preventDefault();
+    const chatInput = document.getElementById('chatInput');
+    sendChatMessage(chatInput.value);
+    chatInput.value = '';
+});
+
+function sendChatMessage(message) {
+    const cleanMessage = message.trim();
+
+    if (!cleanMessage) {
+        return;
+    }
+
+    addChatMessage(cleanMessage, 'user');
+
+    window.setTimeout(() => {
+        addChatMessage(generateChatResponse(cleanMessage), 'bot');
+    }, 400);
+}
+
+function addChatMessage(message, type) {
+    const element = document.createElement('div');
+    element.className = `msg ${type}`;
+    element.textContent = message;
+    chatMessages.appendChild(element);
+    chatMessages.scrollTop = chatMessages.scrollHeight;
+}
+
+function generateChatResponse(question) {
+    const result = detectVisitorIntent(question);
+
+    const responses = {
+        investment: 'Springfield includes commercial, health, education and technology precincts. A live system could guide investors to current opportunities and approved contacts.',
+        living: 'Springfield offers connected neighbourhoods, transport, parks, shopping, healthcare and community services.',
+        education: 'Springfield offers schools, higher education, childcare and training options. A live concierge could show verified providers, locations and contacts.',
+        health: 'Springfield’s health precinct supports hospitals, medical services, allied health, research and healthcare business opportunities.',
+        events: 'A live concierge could show current events, dining, recreation and visitor information from approved Springfield sources.',
+    };
+
+    return responses[result.intent] || 'In the live version, I would answer using approved Springfield website content, reports and project information.';
+}
+
 </script>
 </body>
 </html>
