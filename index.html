@@ -2937,6 +2937,77 @@ body.theme-living .stat strong{
   }
 }
 
+
+/* =========================================================
+   V8 — MOBILE INTEREST SWITCHING FIX
+   ========================================================= */
+
+@media(max-width:720px){
+  .navin{
+    height:72px;
+    gap:8px;
+  }
+
+  .sitebrand{
+    min-width:0;
+    gap:8px;
+  }
+
+  .sitebrand .logo{
+    width:40px;
+    height:40px;
+  }
+
+  .sitebrand strong{
+    font-size:.86rem;
+    white-space:nowrap;
+  }
+
+  .sitebrand small{
+    display:none;
+  }
+
+  .change{
+    display:inline-flex !important;
+    align-items:center;
+    justify-content:center;
+    min-height:38px;
+    padding:8px 11px;
+    border-radius:10px;
+    font-size:.72rem;
+    white-space:nowrap;
+  }
+
+  .mobile{
+    display:inline-flex;
+    min-height:38px;
+    align-items:center;
+    justify-content:center;
+    padding:8px 10px;
+    font-size:.72rem;
+  }
+
+  .links{
+    top:72px;
+  }
+}
+
+@media(max-width:390px){
+  .sitebrand strong{
+    font-size:.76rem;
+  }
+
+  .change{
+    padding:7px 8px;
+    font-size:.66rem;
+  }
+
+  .mobile{
+    padding:7px 8px;
+    font-size:.66rem;
+  }
+}
+
 </style>
 </head>
 <body>
@@ -3617,12 +3688,14 @@ document.getElementById('skip').addEventListener('click', () => {
 document.getElementById('change').addEventListener('click', () => {
     intentScreen.style.display = '';
     intentScreen.hidden = false;
+    intentError.textContent = '';
+    intentScreen.scrollTop = 0;
 
     window.requestAnimationFrame(() => {
         intentScreen.classList.remove('hide');
     });
 
-    intentInput.focus();
+    window.setTimeout(() => intentInput.focus(), 120);
 });
 
 document.getElementById('mobile').addEventListener('click', () => {
@@ -3834,10 +3907,18 @@ const savedIntent = localStorage.getItem('springfield_intent');
 const savedQuery = localStorage.getItem('springfield_query') || '';
 
 try {
-    applyPageContent(savedIntent || 'general', savedQuery);
+    // Always begin with the welcome screen instead of silently reopening
+    // the previously selected audience segment.
+    applyPageContent('general');
 
-    if (savedIntent) {
-        closeIntentScreen();
+    if (savedQuery && intentInput) {
+        intentInput.value = savedQuery;
+    }
+
+    if (intentScreen) {
+        intentScreen.style.display = '';
+        intentScreen.hidden = false;
+        intentScreen.classList.remove('hide');
     }
 } catch (error) {
     console.error('Springfield page initialisation failed:', error);
