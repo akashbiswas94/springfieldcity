@@ -33,6 +33,726 @@ nav{position:sticky;top:0;z-index:100;color:#fff;background:rgba(0,42,66,.94);ba
 footer{padding:58px 0 28px;color:#a8bac5;background:var(--navy2)}.footergrid{display:grid;grid-template-columns:1.4fr repeat(4,1fr);gap:32px}.footerbrand{display:flex;align-items:center;gap:12px;color:#fff}.footergrid h4{margin:0 0 13px;color:#fff;font-size:.9rem}.footergrid ul{list-style:none;margin:0;padding:0}.footergrid li{margin:8px 0;font-size:.84rem}.footerbottom{display:flex;justify-content:space-between;gap:20px;margin-top:40px;padding-top:22px;border-top:1px solid rgba(255,255,255,.08);font-size:.78rem}
 @media(max-width:1000px){.links{position:absolute;top:78px;left:20px;right:20px;display:none;flex-direction:column;padding:14px;border-radius:16px;background:var(--navy);box-shadow:var(--shadow)}.links.open{display:flex}.mobile{display:block}.grid,.newsgrid{grid-template-columns:repeat(2,1fr)}.immersivegrid{grid-template-columns:1fr}.footergrid{grid-template-columns:repeat(2,1fr)}}
 @media(max-width:720px){.intent-main{padding:65px 0 35px}.intent h1{font-size:3.55rem}.searchbox{display:block}.searchbox input{width:100%}.searchbox button{width:100%;min-height:54px}.bottom{flex-direction:column}.change{display:none}.hero{min-height:640px}.hero h1{font-size:3.35rem}.statsgrid{grid-template-columns:repeat(2,1fr)}.head{align-items:flex-start;flex-direction:column}.grid,.newsgrid{grid-template-columns:1fr}.citybuttons{grid-template-columns:1fr}.city{min-height:610px}.footergrid{grid-template-columns:1fr 1fr}.footerbottom{flex-direction:column}}
+
+/* =========================================================
+   AUDIENCE-SPECIFIC VISUAL THEMES
+   The keyword system remains unchanged. These styles change
+   the complete visual direction after an audience is detected.
+   ========================================================= */
+
+body{
+    --theme-bg:#f5f8fa;
+    --theme-surface:#ffffff;
+    --theme-text:#102433;
+    --theme-muted:#6a7c87;
+    --theme-radius:30px;
+    --theme-font-display:'Manrope',sans-serif;
+    background:var(--theme-bg);
+    color:var(--theme-text);
+    transition:background .45s ease,color .45s ease;
+}
+
+.hero{
+    isolation:isolate;
+    transition:min-height .45s ease,background .45s ease;
+}
+.hero-content{
+    width:100%;
+    transition:padding .45s ease,transform .45s ease;
+}
+.hero h1,.hero p,.hero .eyebrow,.hero .tags,.hero .actions{
+    transition:all .45s ease;
+}
+.hero-extras{
+    margin-top:30px;
+}
+.hero-extra-grid{
+    display:grid;
+    gap:14px;
+}
+.hero-extra-card{
+    position:relative;
+    overflow:hidden;
+}
+.theme-label{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    margin-bottom:18px;
+    padding:8px 12px;
+    border-radius:999px;
+    font-size:.72rem;
+    font-weight:800;
+    letter-spacing:.1em;
+    text-transform:uppercase;
+}
+.theme-label:before{
+    content:'';
+    width:8px;
+    height:8px;
+    border-radius:50%;
+    background:currentColor;
+    box-shadow:0 0 0 5px color-mix(in srgb,currentColor 18%,transparent);
+}
+.hero-scroll-note{
+    position:absolute;
+    right:28px;
+    bottom:24px;
+    z-index:3;
+    color:rgba(255,255,255,.65);
+    font-size:.73rem;
+    font-weight:700;
+    letter-spacing:.08em;
+    text-transform:uppercase;
+    writing-mode:vertical-rl;
+}
+
+/* -------------------------
+   GENERAL
+   ------------------------- */
+body.theme-general{
+    --theme-bg:#f5f8fa;
+    --theme-surface:#ffffff;
+    --theme-text:#102433;
+    --theme-muted:#6a7c87;
+}
+body.theme-general .hero-extra-grid{
+    grid-template-columns:repeat(3,minmax(0,1fr));
+    max-width:820px;
+}
+body.theme-general .hero-extra-card{
+    padding:17px 18px;
+    border:1px solid rgba(255,255,255,.18);
+    border-radius:18px;
+    background:rgba(255,255,255,.09);
+    backdrop-filter:blur(12px);
+}
+body.theme-general .hero-extra-card strong,
+body.theme-general .hero-extra-card span{
+    display:block;
+}
+body.theme-general .hero-extra-card span{
+    margin-top:4px;
+    color:#d6e2e8;
+    font-size:.78rem;
+}
+
+/* -------------------------
+   INVESTMENT — PREMIUM CORPORATE
+   ------------------------- */
+body.theme-investment{
+    --theme-bg:#eef2f4;
+    --theme-surface:#ffffff;
+    --theme-text:#0a2232;
+    --theme-muted:#5f707b;
+    --theme-radius:18px;
+    --accent:#d9ad32;
+    --accentSoft:#f4e4a6;
+}
+body.theme-investment nav{
+    background:rgba(3,22,34,.95);
+}
+body.theme-investment .hero{
+    min-height:780px;
+    align-items:center;
+    background:#071c28;
+}
+body.theme-investment .hero-bg{
+    inset:0 0 0 42%;
+    background-position:center;
+    clip-path:polygon(18% 0,100% 0,100% 100%,0 100%);
+}
+body.theme-investment .hero-bg:before{
+    background:
+      linear-gradient(90deg,rgba(4,21,31,.9),rgba(4,21,31,.36) 55%,rgba(4,21,31,.08)),
+      linear-gradient(0deg,rgba(4,21,31,.7),transparent 65%);
+}
+body.theme-investment .hero-bg:after{
+    background:linear-gradient(135deg,#d9ad32,transparent 52%);
+    opacity:.2;
+}
+body.theme-investment .hero:before{
+    content:'';
+    position:absolute;
+    inset:0;
+    z-index:-1;
+    background:
+      linear-gradient(90deg,#071c28 0,#071c28 52%,transparent 72%),
+      repeating-linear-gradient(90deg,transparent 0 119px,rgba(255,255,255,.035) 120px);
+}
+body.theme-investment .hero-content{
+    padding:135px 0 90px;
+}
+body.theme-investment .hero h1{
+    max-width:680px;
+    font-size:clamp(3.4rem,6.1vw,6.9rem);
+    letter-spacing:-.065em;
+}
+body.theme-investment .hero p{
+    max-width:610px;
+    color:#c8d3d9;
+}
+body.theme-investment .theme-label{
+    color:#f0cc68;
+    border:1px solid rgba(217,173,50,.35);
+    background:rgba(217,173,50,.08);
+}
+body.theme-investment .tags span{
+    border-radius:5px;
+    border-color:rgba(217,173,50,.28);
+    color:#f6df9e;
+    background:rgba(217,173,50,.08);
+}
+body.theme-investment .btn{
+    border-radius:7px;
+}
+body.theme-investment .hero-extra-grid{
+    grid-template-columns:repeat(3,minmax(0,1fr));
+    max-width:760px;
+}
+body.theme-investment .hero-extra-card{
+    min-height:116px;
+    padding:22px;
+    border-top:2px solid var(--accent);
+    border-radius:4px;
+    background:rgba(255,255,255,.07);
+    backdrop-filter:blur(14px);
+}
+body.theme-investment .hero-extra-card strong{
+    display:block;
+    color:#fff;
+    font-family:'Manrope';
+    font-size:1.55rem;
+}
+body.theme-investment .hero-extra-card span{
+    display:block;
+    margin-top:8px;
+    color:#acbcc5;
+    font-size:.78rem;
+    line-height:1.45;
+}
+body.theme-investment .stats{
+    background:#071c28;
+    border-color:rgba(255,255,255,.08);
+}
+body.theme-investment .stat{
+    border:1px solid rgba(255,255,255,.08);
+    border-left:3px solid var(--c);
+    border-radius:5px;
+    background:#0c2838;
+}
+body.theme-investment .stat strong{color:#fff}
+body.theme-investment .stat span{color:#aebdc5}
+body.theme-investment .section .card{
+    border-radius:10px;
+}
+body.theme-investment .cardimg{
+    height:270px;
+}
+body.theme-investment .head h2{
+    max-width:800px;
+}
+body.theme-investment .immersive{
+    background:#061923;
+}
+body.theme-investment .city{
+    border-radius:8px;
+}
+body.theme-investment .newsitem{
+    border-radius:8px;
+}
+body.theme-investment .cta:before{
+    background:linear-gradient(90deg,rgba(2,18,27,.94),rgba(2,18,27,.64));
+}
+
+/* -------------------------
+   LIVING — COSY FAMILY HOME
+   ------------------------- */
+body.theme-living{
+    --theme-bg:#fbf7ef;
+    --theme-surface:#fffdf9;
+    --theme-text:#254333;
+    --theme-muted:#6d7f70;
+    --theme-radius:34px;
+    --accent:#e6a65d;
+    --accentSoft:#f8dec0;
+    background:
+      radial-gradient(circle at 10% 10%,rgba(230,166,93,.12),transparent 24%),
+      #fbf7ef;
+}
+body.theme-living nav{
+    color:#234333;
+    background:rgba(255,250,242,.93);
+    border-bottom-color:rgba(37,67,51,.08);
+}
+body.theme-living .sitebrand small,
+body.theme-living .links a{
+    color:#6d7f70;
+}
+body.theme-living .links a:hover,
+body.theme-living .links a.priority{
+    color:#254333;
+    background:#f4eadc;
+}
+body.theme-living .mobile{
+    color:#254333;
+    border-color:rgba(37,67,51,.2);
+}
+body.theme-living .hero{
+    min-height:760px;
+    align-items:center;
+    padding:70px 0;
+    background:#dfeadf;
+}
+body.theme-living .hero-bg{
+    inset:30px 30px 30px 46%;
+    border-radius:44px 0 0 44px;
+    box-shadow:0 30px 80px rgba(49,76,57,.2);
+}
+body.theme-living .hero-bg:before{
+    background:linear-gradient(90deg,rgba(38,68,51,.55),rgba(38,68,51,.05));
+}
+body.theme-living .hero-bg:after{
+    background:linear-gradient(145deg,#e8b77d,transparent 50%);
+    opacity:.22;
+}
+body.theme-living .hero:before{
+    content:'';
+    position:absolute;
+    inset:0;
+    z-index:-1;
+    background:
+      radial-gradient(circle at 16% 22%,rgba(255,255,255,.9),transparent 28%),
+      linear-gradient(135deg,#eef5eb,#dce9df);
+}
+body.theme-living .hero-content{
+    width:min(calc(100% - 40px),1240px);
+    padding:100px 0;
+}
+body.theme-living .hero h1{
+    max-width:640px;
+    color:#234333;
+    font-size:clamp(3.3rem,5.7vw,6.2rem);
+    letter-spacing:-.06em;
+}
+body.theme-living .hero p{
+    max-width:590px;
+    color:#58705f;
+}
+body.theme-living .theme-label{
+    color:#9c5f27;
+    background:#fff7eb;
+    box-shadow:0 8px 25px rgba(120,78,34,.1);
+}
+body.theme-living .eyebrow{
+    color:#9c5f27;
+}
+body.theme-living .tags{
+    max-width:650px;
+}
+body.theme-living .tags span{
+    color:#315442;
+    border-color:rgba(49,84,66,.13);
+    background:rgba(255,255,255,.76);
+    box-shadow:0 8px 22px rgba(49,84,66,.08);
+}
+body.theme-living .btn-primary{
+    color:#fff;
+    background:#315d48;
+}
+body.theme-living .btn-ghost{
+    color:#315442;
+    border-color:rgba(49,84,66,.22);
+    background:rgba(255,255,255,.65);
+}
+body.theme-living .hero-extra-grid{
+    grid-template-columns:repeat(4,minmax(0,1fr));
+    max-width:760px;
+}
+body.theme-living .hero-extra-card{
+    padding:17px 15px;
+    border:1px solid rgba(49,84,66,.1);
+    border-radius:22px;
+    color:#315442;
+    background:rgba(255,255,255,.78);
+    box-shadow:0 14px 34px rgba(49,84,66,.1);
+}
+body.theme-living .hero-extra-card strong{
+    display:block;
+    font-size:1.25rem;
+}
+body.theme-living .hero-extra-card span{
+    display:block;
+    margin-top:5px;
+    color:#6a7d6f;
+    font-size:.75rem;
+    line-height:1.4;
+}
+body.theme-living .stats{
+    background:#fffaf2;
+}
+body.theme-living .stat{
+    border-left:0;
+    border-radius:24px;
+    background:#fff;
+    box-shadow:0 12px 30px rgba(49,84,66,.07);
+}
+body.theme-living .card,
+body.theme-living .newsitem{
+    border-radius:32px;
+}
+body.theme-living .cardimg{
+    height:265px;
+}
+body.theme-living .immersive{
+    color:#234333;
+    background:#e7efe4;
+}
+body.theme-living .immersive p{
+    color:#607567;
+}
+body.theme-living .city{
+    border-radius:38px;
+}
+body.theme-living .cta:before{
+    background:rgba(39,70,53,.7);
+}
+
+/* -------------------------
+   EVENTS — NEW GENERATION / SOCIAL
+   ------------------------- */
+body.theme-events{
+    --theme-bg:#0d0918;
+    --theme-surface:#161022;
+    --theme-text:#ffffff;
+    --theme-muted:#b7aeca;
+    --theme-radius:24px;
+    --accent:#ff4fc8;
+    --accentSoft:#ffd0f0;
+    background:
+      radial-gradient(circle at 15% 10%,rgba(255,79,200,.17),transparent 30%),
+      radial-gradient(circle at 85% 15%,rgba(0,229,255,.14),transparent 30%),
+      #0d0918;
+}
+body.theme-events nav{
+    background:rgba(12,8,23,.82);
+    border-bottom-color:rgba(255,255,255,.1);
+}
+body.theme-events .change{
+    color:#fff;
+    background:linear-gradient(90deg,#ff4fc8,#7d5cff);
+}
+body.theme-events .hero{
+    min-height:810px;
+    align-items:center;
+    background:#0d0918;
+}
+body.theme-events .hero-bg{
+    inset:0;
+    transform:scale(1.03);
+    filter:saturate(1.3) contrast(1.08);
+}
+body.theme-events .hero-bg:before{
+    background:
+      linear-gradient(90deg,rgba(11,7,22,.93),rgba(11,7,22,.48) 55%,rgba(11,7,22,.25)),
+      linear-gradient(0deg,rgba(11,7,22,.88),transparent 60%);
+}
+body.theme-events .hero-bg:after{
+    background:
+      radial-gradient(circle at 80% 20%,#00e5ff,transparent 24%),
+      radial-gradient(circle at 30% 80%,#ff4fc8,transparent 25%);
+    opacity:.34;
+    mix-blend-mode:screen;
+}
+body.theme-events .hero:before{
+    content:'SPRINGFIELD • LIVE • NOW • ';
+    position:absolute;
+    top:105px;
+    left:-30px;
+    z-index:2;
+    color:rgba(255,255,255,.08);
+    font-family:'Manrope';
+    font-size:clamp(5rem,12vw,12rem);
+    font-weight:800;
+    letter-spacing:-.07em;
+    white-space:nowrap;
+    transform:rotate(-5deg);
+}
+body.theme-events .hero-content{
+    padding:150px 0 95px;
+}
+body.theme-events .hero h1{
+    max-width:850px;
+    font-size:clamp(4rem,8vw,8rem);
+    line-height:.92;
+    letter-spacing:-.075em;
+    text-transform:uppercase;
+}
+body.theme-events .hero p{
+    max-width:660px;
+    color:#ddd5eb;
+}
+body.theme-events .theme-label{
+    color:#fff;
+    background:linear-gradient(90deg,#ff4fc8,#7d5cff);
+    box-shadow:0 0 30px rgba(255,79,200,.35);
+}
+body.theme-events .eyebrow{
+    color:#73f3ff;
+}
+body.theme-events .tags span{
+    border:0;
+    color:#fff;
+    background:rgba(255,255,255,.12);
+    box-shadow:inset 0 0 0 1px rgba(255,255,255,.12);
+    transform:rotate(-1deg);
+}
+body.theme-events .tags span:nth-child(even){
+    transform:rotate(1deg);
+}
+body.theme-events .btn-primary{
+    color:#fff;
+    background:linear-gradient(90deg,#ff4fc8,#7d5cff);
+    box-shadow:0 16px 45px rgba(255,79,200,.28);
+}
+body.theme-events .btn-ghost{
+    border-color:rgba(115,243,255,.38);
+    background:rgba(10,8,23,.45);
+}
+body.theme-events .hero-extra-grid{
+    grid-template-columns:repeat(3,minmax(0,1fr));
+    max-width:880px;
+}
+body.theme-events .hero-extra-card{
+    min-height:138px;
+    padding:22px;
+    border:1px solid rgba(255,255,255,.14);
+    border-radius:24px;
+    background:linear-gradient(145deg,rgba(255,255,255,.13),rgba(255,255,255,.05));
+    backdrop-filter:blur(16px);
+    box-shadow:0 20px 55px rgba(0,0,0,.24);
+}
+body.theme-events .hero-extra-card:nth-child(1){
+    transform:rotate(-2deg);
+}
+body.theme-events .hero-extra-card:nth-child(2){
+    transform:translateY(12px) rotate(1.5deg);
+}
+body.theme-events .hero-extra-card:nth-child(3){
+    transform:rotate(-1deg);
+}
+body.theme-events .hero-extra-card strong{
+    display:block;
+    font-family:'Manrope';
+    font-size:1.3rem;
+}
+body.theme-events .hero-extra-card span{
+    display:block;
+    margin-top:8px;
+    color:#c8bfd8;
+    font-size:.78rem;
+    line-height:1.45;
+}
+body.theme-events .stats{
+    background:#0d0918;
+    border-color:rgba(255,255,255,.08);
+}
+body.theme-events .stat{
+    border:1px solid rgba(255,255,255,.1);
+    border-left:0;
+    background:#171123;
+}
+body.theme-events .stat strong{color:#fff}
+body.theme-events .stat span{color:#b7aeca}
+body.theme-events .section{
+    color:#fff;
+}
+body.theme-events .head p,
+body.theme-events .card p,
+body.theme-events .newsitem small{
+    color:#b7aeca;
+}
+body.theme-events .card,
+body.theme-events .newsitem{
+    color:#fff;
+    border-color:rgba(255,255,255,.1);
+    background:#171123;
+}
+body.theme-events .card{
+    box-shadow:0 20px 55px rgba(0,0,0,.25);
+}
+body.theme-events .card:nth-child(2){
+    transform:translateY(18px);
+}
+body.theme-events .card:hover{
+    transform:translateY(-7px) rotate(-1deg);
+}
+body.theme-events .card:nth-child(2):hover{
+    transform:translateY(8px) rotate(1deg);
+}
+body.theme-events .tag{
+    color:#fff;
+    background:linear-gradient(90deg,#ff4fc8,#7d5cff);
+}
+body.theme-events .learn{
+    color:#73f3ff;
+}
+body.theme-events .immersive{
+    background:linear-gradient(135deg,#171123,#0b1720);
+}
+body.theme-events .city{
+    border-color:rgba(115,243,255,.2);
+    box-shadow:0 30px 90px rgba(0,0,0,.45);
+}
+body.theme-events .news{
+    background:#100b1a;
+}
+body.theme-events .cta:before{
+    background:linear-gradient(135deg,rgba(17,8,28,.88),rgba(44,10,49,.72));
+}
+
+/* -------------------------
+   EDUCATION — MODERN KNOWLEDGE
+   ------------------------- */
+body.theme-education{
+    --theme-bg:#f4f1ff;
+    --theme-text:#251d43;
+    --theme-muted:#6e6487;
+}
+body.theme-education .hero-bg:after{
+    background:linear-gradient(135deg,#a58cff,transparent 50%);
+}
+body.theme-education .hero-extra-grid{
+    grid-template-columns:repeat(3,minmax(0,1fr));
+    max-width:790px;
+}
+body.theme-education .hero-extra-card{
+    padding:20px;
+    border:1px solid rgba(255,255,255,.18);
+    border-radius:22px;
+    background:rgba(74,50,123,.35);
+    backdrop-filter:blur(14px);
+}
+body.theme-education .hero-extra-card strong,
+body.theme-education .hero-extra-card span{display:block}
+body.theme-education .hero-extra-card span{
+    margin-top:6px;
+    color:#ddd6f4;
+    font-size:.78rem;
+}
+
+/* -------------------------
+   HEALTH — CALM CLINICAL
+   ------------------------- */
+body.theme-health{
+    --theme-bg:#eef9f7;
+    --theme-text:#153e3a;
+    --theme-muted:#617c78;
+}
+body.theme-health .hero-bg:after{
+    background:linear-gradient(135deg,#45d2c4,transparent 50%);
+}
+body.theme-health .hero-extra-grid{
+    grid-template-columns:repeat(3,minmax(0,1fr));
+    max-width:800px;
+}
+body.theme-health .hero-extra-card{
+    padding:20px;
+    border:1px solid rgba(255,255,255,.2);
+    border-radius:18px;
+    background:rgba(23,96,89,.34);
+    backdrop-filter:blur(14px);
+}
+body.theme-health .hero-extra-card strong,
+body.theme-health .hero-extra-card span{display:block}
+body.theme-health .hero-extra-card span{
+    margin-top:6px;
+    color:#d5efec;
+    font-size:.78rem;
+}
+
+/* Entry screen improvements */
+.intent-main{
+    max-width:1040px;
+}
+.intent h1{
+    max-width:980px;
+}
+.suggestions button{
+    transition:.22s ease;
+}
+.suggestions button:hover{
+    transform:translateY(-2px);
+}
+
+/* Responsive theme adjustments */
+@media(max-width:1000px){
+    body.theme-investment .hero-bg{
+        inset:0;
+        clip-path:none;
+    }
+    body.theme-investment .hero:before{
+        background:linear-gradient(90deg,rgba(7,28,40,.96),rgba(7,28,40,.67));
+    }
+    body.theme-living .hero-bg{
+        inset:0;
+        border-radius:0;
+    }
+    body.theme-living .hero-bg:before{
+        background:rgba(34,67,49,.62);
+    }
+    body.theme-living .hero h1,
+    body.theme-living .hero p{
+        color:#fff;
+    }
+    body.theme-living .theme-label{
+        color:#315442;
+    }
+    body.theme-living .hero-extra-grid,
+    body.theme-events .hero-extra-grid{
+        grid-template-columns:repeat(2,minmax(0,1fr));
+    }
+}
+@media(max-width:720px){
+    .hero-scroll-note{display:none}
+    .hero-extra-grid,
+    body.theme-general .hero-extra-grid,
+    body.theme-investment .hero-extra-grid,
+    body.theme-living .hero-extra-grid,
+    body.theme-events .hero-extra-grid,
+    body.theme-education .hero-extra-grid,
+    body.theme-health .hero-extra-grid{
+        grid-template-columns:1fr;
+    }
+    body.theme-investment .hero,
+    body.theme-living .hero,
+    body.theme-events .hero{
+        min-height:760px;
+    }
+    body.theme-investment .hero-extra-card,
+    body.theme-events .hero-extra-card{
+        min-height:auto;
+    }
+    body.theme-events .hero h1{
+        font-size:3.7rem;
+    }
+    body.theme-events .hero-extra-card,
+    body.theme-events .hero-extra-card:nth-child(1),
+    body.theme-events .hero-extra-card:nth-child(2),
+    body.theme-events .hero-extra-card:nth-child(3){
+        transform:none;
+    }
+    body.theme-living nav{
+        color:#fff;
+        background:rgba(34,67,49,.95);
+    }
+    body.theme-living .sitebrand small,
+    body.theme-living .links a,
+    body.theme-living .mobile{
+        color:#fff;
+    }
+}
+
 </style>
 </head>
 <body>
@@ -65,7 +785,22 @@ footer{padding:58px 0 28px;color:#a8bac5;background:var(--navy2)}.footergrid{dis
   </div>
 </section>
 <nav><div class="container navin"><a class="sitebrand" href="#"><img class="logo" src="springfield-logo.png" alt="Springfield City logo"><span><strong>Springfield City</strong><small id="subtitle">Future Ready</small></span></a><div class="links" id="links"></div><button class="change" id="change">Change interest</button><button class="mobile" id="mobile">Menu</button></div></nav>
-<header class="hero"><div class="hero-bg" id="heroBg"></div><div class="container hero-content"><span class="eyebrow" id="heroEyebrow"></span><h1 id="heroTitle"></h1><p id="heroText"></p><div class="tags" id="tags"></div><div class="actions"><a class="btn btn-primary" id="primary" href="#featured"></a><a class="btn btn-ghost" id="secondary" href="#contact"></a></div></div></header>
+<header class="hero">
+  <div class="hero-bg" id="heroBg"></div>
+  <div class="container hero-content">
+    <span class="theme-label" id="themeLabel">Personalised experience</span>
+    <span class="eyebrow" id="heroEyebrow"></span>
+    <h1 id="heroTitle"></h1>
+    <p id="heroText"></p>
+    <div class="tags" id="tags"></div>
+    <div class="actions">
+      <a class="btn btn-primary" id="primary" href="#featured"></a>
+      <a class="btn btn-ghost" id="secondary" href="#contact"></a>
+    </div>
+    <div class="hero-extras" id="heroExtras"></div>
+  </div>
+  <span class="hero-scroll-note">Scroll to explore</span>
+</header>
 <section class="stats"><div class="container statsgrid"><article class="stat" style="--c:#24b883"><strong>55,000+</strong><span>residents call Springfield City home</span></article><article class="stat" style="--c:#fecb00"><strong>$30bn+</strong><span>investment across the city</span></article><article class="stat" style="--c:#65a6ff"><strong>2,707+</strong><span>businesses operating across the city</span></article><article class="stat" style="--c:#ff6b6b"><strong>35 min</strong><span>approximately to Brisbane CBD</span></article></div></section>
 <section class="section" id="featured"><div class="container"><div class="head"><div><span class="eyebrow" id="fEye"></span><h2 id="fTitle"></h2></div><p id="fText"></p></div><div class="grid" id="cards"></div></div></section>
 <section class="immersive"><div class="container immersivegrid"><div><span class="eyebrow">Interactive city experience</span><h2>Explore Springfield as a living digital city.</h2><p>This concept could grow into a browser-based map or 3D city model where visitors explore precincts, projects and opportunities in a more visual way.</p><a class="btn btn-primary" href="#contact">Explore the digital city concept</a></div><div class="city"><div class="citybuttons"><button><strong>Health City</strong><span>Healthcare, research and commercial opportunities</span></button><button><strong>IDEA City</strong><span>Education, innovation and knowledge industries</span></button><button><strong>Springfield Central</strong><span>Transport, retail, business and community</span></button></div></div></div></section>
@@ -227,8 +962,8 @@ const pageContent = {
         subtitle: 'Investment and Growth',
         heroImage: images.springfieldTower,
         heroEyebrow: 'Invest in Greater Springfield',
-        heroTitle: 'Build your future in a city designed for growth.',
-        heroDescription: 'Explore commercial land, business precincts, infrastructure projects and long-term development opportunities.',
+        heroTitle: 'Invest with confidence in a city designed for growth.',
+        heroDescription: 'Access commercial land, strategic precincts, infrastructure projects and long-term development opportunities in Greater Springfield.',
         tags: ['Commercial land', 'Business growth', 'Development sites', 'Infrastructure'],
         primaryAction: 'Explore investment opportunities',
         secondaryAction: 'Speak with the investment team',
@@ -253,8 +988,8 @@ const pageContent = {
         subtitle: 'Living and Community',
         heroImage: images.parklands,
         heroEyebrow: 'Live in Greater Springfield',
-        heroTitle: 'A connected community built for everyday life.',
-        heroDescription: 'Explore homes, neighbourhoods, transport, parks, healthcare, shopping and community services.',
+        heroTitle: 'A place where family life feels at home.',
+        heroDescription: 'Discover welcoming neighbourhoods, green spaces, schools, healthcare and everyday connections designed around family life.',
         tags: ['Neighbourhoods', 'Transport', 'Parks', 'Community'],
         primaryAction: 'Explore living in Springfield',
         secondaryAction: 'View neighbourhoods',
@@ -331,14 +1066,14 @@ const pageContent = {
         subtitle: 'Events and Experiences',
         heroImage: images.orionLagoon,
         heroEyebrow: 'Experience Greater Springfield',
-        heroTitle: 'Discover what is happening across Springfield.',
-        heroDescription: 'Find events, dining, attractions, entertainment and family-friendly activities.',
+        heroTitle: 'Springfield is live. Be part of it.',
+        heroDescription: 'Live music, food, festivals, sport, family experiences and the moments everyone will be talking about next.',
         tags: ['Upcoming events', 'Things to do', 'Dining', 'Family activities'],
         primaryAction: 'View upcoming events',
         secondaryAction: 'Explore places to visit',
         navigation: ['Events', 'Things to Do', 'Dining', 'Family', 'Getting Here', 'Contact'],
         featuredEyebrow: 'Events and experiences',
-        featuredTitle: 'Find something worth experiencing.',
+        featuredTitle: 'Your next favourite memory starts here.',
         featuredDescription: 'A more visual way to plan a visit, discover local experiences and see what is happening.',
         cards: [
             { tag: 'Events', title: 'Upcoming events and activities', description: 'Discover festivals, community events and local experiences.', image: images.orionLagoon },
@@ -351,6 +1086,87 @@ const pageContent = {
         contactImage: images.playground,
     },
 };
+
+
+const audienceVisuals = {
+    general: {
+        label: 'Personalised city experience',
+        extras: [
+            { value: 'One city', label: 'Investment, lifestyle and opportunity' },
+            { value: 'Five pathways', label: 'Content shaped around visitor intent' },
+            { value: 'Always connected', label: 'A smarter way to explore Springfield' },
+        ],
+    },
+    investment: {
+        label: 'Investor intelligence',
+        extras: [
+            { value: '$30B+', label: 'Investment across Greater Springfield' },
+            { value: '2,707+', label: 'Businesses operating across the city' },
+            { value: '35 min', label: 'Approximate connection to Brisbane CBD' },
+        ],
+    },
+    living: {
+        label: 'Made for family life',
+        extras: [
+            { value: 'Homes', label: 'Established and growing neighbourhoods' },
+            { value: 'Parks', label: 'Open spaces, recreation and family time' },
+            { value: 'Schools', label: 'Learning options for every stage' },
+            { value: 'Transport', label: 'Road and rail connections for daily life' },
+        ],
+    },
+    education: {
+        label: 'Learning without limits',
+        extras: [
+            { value: 'Early learning', label: 'Childcare and foundation education' },
+            { value: 'Schools', label: 'Primary and secondary pathways' },
+            { value: 'Higher education', label: 'University, research and training' },
+        ],
+    },
+    health: {
+        label: 'Care, research and growth',
+        extras: [
+            { value: 'Health City', label: 'A connected healthcare precinct' },
+            { value: 'Clinical care', label: 'Medical and allied health services' },
+            { value: 'Innovation', label: 'Research, education and partnership' },
+        ],
+    },
+    events: {
+        label: 'Live in Springfield',
+        extras: [
+            { value: 'This weekend', label: 'Events, markets and community experiences' },
+            { value: 'Eat & meet', label: 'Dining, cafés and places to socialise' },
+            { value: 'Play all day', label: 'Activities, parks and family entertainment' },
+        ],
+    },
+};
+
+function renderAudienceVisuals(audienceKey) {
+    const visuals = audienceVisuals[audienceKey] || audienceVisuals.general;
+    const label = document.getElementById('themeLabel');
+    const container = document.getElementById('heroExtras');
+
+    label.textContent = visuals.label;
+    container.replaceChildren();
+
+    const grid = document.createElement('div');
+    grid.className = 'hero-extra-grid';
+
+    visuals.extras.forEach((item) => {
+        const card = document.createElement('div');
+        card.className = 'hero-extra-card';
+
+        const value = document.createElement('strong');
+        value.textContent = item.value;
+
+        const description = document.createElement('span');
+        description.textContent = item.label;
+
+        card.append(value, description);
+        grid.appendChild(card);
+    });
+
+    container.appendChild(grid);
+}
 
 const intentScreen = document.getElementById('intent');
 const intentForm = document.getElementById('intentForm');
@@ -496,7 +1312,9 @@ function closeIntentScreen() {
 
 function applyPageContent(audienceKey, visitorRequest = '', matchedTerms = []) {
     const content = pageContent[audienceKey] || pageContent.general;
+    const activeAudience = pageContent[audienceKey] ? audienceKey : 'general';
 
+    document.body.className = `theme-${activeAudience}`;
     document.documentElement.style.setProperty('--accent', content.accent);
     document.documentElement.style.setProperty('--accentSoft', content.accentSoft);
 
@@ -510,6 +1328,7 @@ function applyPageContent(audienceKey, visitorRequest = '', matchedTerms = []) {
 
     renderTags(content.tags, visitorRequest, matchedTerms);
     renderNavigation(content.navigation);
+    renderAudienceVisuals(activeAudience);
 
     document.getElementById('fEye').textContent = content.featuredEyebrow;
     document.getElementById('fTitle').textContent = content.featuredTitle;
