@@ -4779,6 +4779,263 @@ body.theme-clinic #nightingale .nightingale-journey,
     }
 }
 
+
+.nightingale-teaser{display:none;padding:88px 0;background:#041d2b;color:#fff}.theme-jobs .nightingale-teaser,.theme-clinic .nightingale-teaser{display:block}.nightingale-teaser-grid{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);align-items:center;gap:42px}.nightingale-teaser-copy h2{max-width:700px;margin-bottom:16px;font-size:clamp(2.7rem,4.8vw,5rem);letter-spacing:-.05em}.nightingale-teaser-copy p{max-width:650px;color:#cbdbe3;line-height:1.7}.nightingale-teaser-points{display:flex;flex-wrap:wrap;gap:10px;margin:26px 0 30px}.nightingale-teaser-points span{padding:9px 13px;border:1px solid rgba(255,255,255,.16);border-radius:999px;background:rgba(255,255,255,.06);font-size:.8rem;font-weight:700}.nightingale-teaser-image{position:relative;min-height:430px;overflow:hidden;border-radius:28px;box-shadow:0 30px 70px rgba(0,0,0,.3)}.nightingale-teaser-image img{width:100%;height:100%;min-height:430px;object-fit:cover}.nightingale-teaser-image:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 48%,rgba(0,20,32,.86))}.nightingale-teaser-image span{position:absolute;z-index:2;right:24px;bottom:22px;left:24px;color:#fff;font-weight:800}@media(max-width:900px){.nightingale-teaser-grid{grid-template-columns:1fr}}@media(max-width:720px){.nightingale-teaser{padding:64px 0}.nightingale-teaser-image,.nightingale-teaser-image img{min-height:310px}}
+
+/* =========================================================
+   NIGHTINGALE TEASER — MAIN SPRINGFIELD PAGE
+   ========================================================= */
+
+.nightingale-teaser {
+    display: none;
+    padding: 72px 0;
+    color: #ffffff;
+    background: #041d2b;
+}
+
+body.theme-jobs .nightingale-teaser,
+body.theme-clinic .nightingale-teaser {
+    display: block;
+}
+
+.nightingale-teaser-grid {
+    display: grid;
+    grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr);
+    align-items: center;
+    gap: 42px;
+}
+
+.nightingale-teaser-copy h2 {
+    max-width: 700px;
+    margin-bottom: 16px;
+    font-size: clamp(2.7rem, 4.6vw, 4.9rem);
+    letter-spacing: -.05em;
+}
+
+.nightingale-teaser-copy p {
+    max-width: 640px;
+    color: #cadbe2;
+    line-height: 1.7;
+}
+
+.nightingale-teaser-points {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 9px;
+    margin: 24px 0 30px;
+}
+
+.nightingale-teaser-points span {
+    padding: 9px 12px;
+    border: 1px solid rgba(255,255,255,.16);
+    border-radius: 999px;
+    background: rgba(255,255,255,.06);
+    font-size: .78rem;
+    font-weight: 700;
+}
+
+.nightingale-teaser-image {
+    position: relative;
+    min-height: 390px;
+    overflow: hidden;
+    border-radius: 28px;
+}
+
+.nightingale-teaser-image img {
+    width: 100%;
+    height: 100%;
+    min-height: 390px;
+    object-fit: cover;
+}
+
+.nightingale-teaser-image::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        180deg,
+        transparent 48%,
+        rgba(0,20,32,.88)
+    );
+}
+
+.nightingale-teaser-image span {
+    position: absolute;
+    z-index: 2;
+    right: 22px;
+    bottom: 20px;
+    left: 22px;
+    color: #ffffff;
+    font-weight: 800;
+}
+
+@media (max-width: 900px) {
+    .nightingale-teaser-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 720px) {
+    .nightingale-teaser {
+        padding: 54px 0;
+    }
+
+    .nightingale-teaser-image,
+    .nightingale-teaser-image img {
+        min-height: 290px;
+    }
+}
+
+
+/* =========================================================
+   MEDICAL CAREER HERO FACTS
+   ========================================================= */
+
+.hero-facts {
+    display: none;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 10px;
+    max-width: 900px;
+    margin-top: 24px;
+}
+
+.hero-fact {
+    min-width: 0;
+    padding: 14px 15px;
+    border: 1px solid rgba(255,255,255,.17);
+    border-radius: 15px;
+    background: rgba(1,31,47,.68);
+    backdrop-filter: blur(12px);
+}
+
+.hero-fact strong,
+.hero-fact span {
+    display: block;
+}
+
+.hero-fact strong {
+    color: var(--accent);
+    font-family: "Manrope", sans-serif;
+    font-size: 1.15rem;
+}
+
+.hero-fact span {
+    margin-top: 4px;
+    color: #d1e0e6;
+    font-size: .72rem;
+    line-height: 1.4;
+}
+
+body.theme-jobs .hero-facts {
+    display: grid;
+}
+
+/* Keep the Nightingale teaser as a secondary gateway. */
+.nightingale-teaser {
+    padding: 68px 0;
+}
+
+.nightingale-teaser-copy h2 {
+    font-size: clamp(2.55rem, 4.1vw, 4.5rem);
+}
+
+.nightingale-teaser-image,
+.nightingale-teaser-image img {
+    min-height: 360px;
+}
+
+@media (max-width: 1000px) {
+    .hero-facts {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 620px) {
+    .hero-facts {
+        grid-template-columns: 1fr;
+    }
+}
+
+
+/* =========================================================
+   NIGHTINGALE FIRST HERO
+   Appears directly below navigation for jobs and clinic
+   searches. The medical-career hero and facts follow it.
+   ========================================================= */
+
+body.theme-jobs .nightingale-teaser,
+body.theme-clinic .nightingale-teaser {
+    display: flex !important;
+    align-items: center;
+    min-height: 680px;
+    padding: 76px 0;
+}
+
+.nightingale-teaser-grid {
+    width: min(95%, 1700px);
+    max-width: 1700px;
+    margin-inline: auto;
+    grid-template-columns:
+        minmax(0, .82fr)
+        minmax(0, 1.18fr);
+    gap: clamp(38px, 5vw, 82px);
+}
+
+.nightingale-teaser-copy h2 {
+    max-width: 720px;
+    font-size: clamp(3.5rem, 6.2vw, 7rem);
+    line-height: .98;
+    letter-spacing: -.065em;
+}
+
+.nightingale-teaser-copy p {
+    max-width: 680px;
+    font-size: 1.05rem;
+}
+
+.nightingale-teaser-image {
+    min-height: 520px;
+}
+
+.nightingale-teaser-image img {
+    min-height: 520px;
+}
+
+.nightingale-teaser-points {
+    margin-top: 28px;
+}
+
+@media (max-width: 950px) {
+    body.theme-jobs .nightingale-teaser,
+    body.theme-clinic .nightingale-teaser {
+        min-height: auto;
+    }
+
+    .nightingale-teaser-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .nightingale-teaser-copy h2 {
+        font-size: clamp(3.2rem, 9vw, 5.5rem);
+    }
+}
+
+@media (max-width: 720px) {
+    body.theme-jobs .nightingale-teaser,
+    body.theme-clinic .nightingale-teaser {
+        padding: 54px 0;
+    }
+
+    .nightingale-teaser-grid {
+        width: calc(100% - 28px);
+    }
+
+    .nightingale-teaser-image,
+    .nightingale-teaser-image img {
+        min-height: 320px;
+    }
+}
+
 </style>
 </head>
 <body>
@@ -4815,6 +5072,24 @@ body.theme-clinic #nightingale .nightingale-journey,
 <nav><div class="container navin"><a class="sitebrand" href="#"><img class="logo" src="springfield-logo.png" alt="Springfield City logo"><span><strong>Springfield City</strong><small id="subtitle">Future Ready</small></span></a><div class="links" id="links"></div><button class="change" id="change">Change interest</button><button class="mobile" id="mobile">Menu</button></div></nav>
 
 <main id="dynamicExperience">
+
+  <section class="nightingale-teaser" id="nightingale">
+  <div class="container nightingale-teaser-grid">
+    <div class="nightingale-teaser-copy">
+      <span class="eyebrow">Nightingale Specialist Suites</span>
+      <h2>Considering your own specialist clinic?</h2>
+      <p>Explore purpose-built specialist suites directly opposite Mater Hospital Springfield, within the wider Health City precinct.</p>
+      <div class="nightingale-teaser-points">
+        <span>Directly opposite Mater Hospital</span><span>Flexible specialist suites</span><span>Growing regional patient catchment</span>
+      </div>
+      <a class="btn btn-primary" href="nightingale.html">Explore Nightingale</a>
+    </div>
+    <a class="nightingale-teaser-image" href="nightingale.html">
+      <img src="assets/nightingale-front-wide.jpg" alt="Nightingale Specialist Suites">
+      <span>View the full Nightingale experience →</span>
+    </a>
+  </div>
+</section>
   <header class="hero" id="hero">
     <div class="hero-bg" id="heroBg"></div>
     <div class="hero-orbit orbit-one"></div>
@@ -4825,6 +5100,13 @@ body.theme-clinic #nightingale .nightingale-journey,
         <span class="eyebrow" id="heroEyebrow"></span>
         <h1 id="heroTitle"></h1>
         <p id="heroText"></p>
+
+        <div
+          class="hero-facts"
+          id="heroFacts"
+          aria-label="Key information"
+        ></div>
+
         <div class="tags" id="tags"></div>
         <div class="actions">
           <a class="btn btn-primary" id="primary" href="#featured"></a>
@@ -4838,189 +5120,7 @@ body.theme-clinic #nightingale .nightingale-journey,
   <section class="stats" id="statsSection">
     <div class="container statsgrid" id="statsGrid"></div>
   </section>
-
-
-  <section class="nightingale-priority" id="nightingale">
-    <div class="container nightingale-shell">
-      <div class="nightingale-hero-fixed">
-        <div class="nightingale-hero-image" aria-hidden="true"></div>
-
-        <div class="nightingale-hero-overlay"></div>
-
-        <div class="nightingale-hero-content">
-          <span class="nightingale-kicker" id="nightingaleEyebrow">Medical careers in Springfield Health City</span>
-
-          <h2 id="nightingaleTitle">Build your medical career in Springfield Health City.</h2>
-
-          <p id="nightingaleDescription">
-            Explore medical, specialist, nursing and allied-health career pathways in a growing
-            health precinct. Nightingale is featured as part of the surrounding professional
-            ecosystem directly opposite Mater Hospital Springfield.
-          </p>
-
-          <div class="nightingale-fact-row">
-            <article>
-              <strong>585,385</strong>
-              <span>people within a 22-minute drive catchment</span>
-            </article>
-
-            <article>
-              <strong>32 km</strong>
-              <span>from Brisbane CBD with direct train access</span>
-            </article>
-
-            <article>
-              <strong>52 ha</strong>
-              <span>integrated healthcare and technology precinct</span>
-            </article>
-          </div>
-
-          <div class="nightingale-actions">
-            <a
-              class="btn nightingale-action-primary"
-              id="nightingalePrimaryLink" href="https://careers.mater.org.au/"
-              target="_blank"
-              rel="noopener"
-            >
-              View Mater careers
-            </a>
-
-            <a
-              class="btn nightingale-action-secondary"
-              id="nightingaleSecondaryLink" href="https://www.springfieldcity.com.au/our-precincts/health/"
-              target="_blank"
-              rel="noopener"
-            >
-              Explore Health City
-            </a>
-          </div>
-        </div>
-
-        <div class="nightingale-hero-badge">
-          <strong id="nightingaleBadgeTitle">Medical careers and professional growth</strong>
-          <span id="nightingaleBadgeText">Explore recognised healthcare employers, a growing medical precinct and the professional environment surrounding Mater Hospital Springfield.</span>
-        </div>
-      </div>
-
-      <div class="nightingale-proof-grid">
-        <article class="nightingale-proof-card nightingale-proof-feature">
-          <span class="eyebrow">Nightingale Specialist Suites</span>
-          <h3>Nightingale: specialist suites directly opposite Mater Hospital Springfield.</h3>
-
-          <div class="nightingale-proof-points">
-            <div><strong>Medical careers</strong><span>Explore recognised medical, nursing, specialist and allied-health career pathways within Springfield Health City.</span></div>
-            <div><strong>Nightingale suites</strong><span>Discover a separate opportunity to establish or relocate a specialist practice directly opposite Mater Hospital Springfield.</span></div>
-            <div><strong>Health City environment</strong><span>Understand the hospital, research, education, transport and lifestyle ecosystem surrounding Nightingale.</span></div>
-          </div>
-        </article>
-
-        <article class="nightingale-proof-card nightingale-image-card">
-          <img src="assets/nightingale-location.jpg" alt="Nightingale opposite Mater Hospital Springfield">
-          <div class="nightingale-image-copy">
-            <span>Nightingale Specialist Suites · Directly opposite Mater Hospital Springfield</span>
-            <h3>Nightingale Specialist Suites within a growing medical ecosystem.</h3>
-          </div>
-        </article>
-
-        <article class="nightingale-proof-card nightingale-health-card">
-          <img src="assets/mater-hospital.jpg" alt="Mater Hospital Springfield development">
-          <div class="nightingale-health-copy">
-            <span class="eyebrow">Health City growth</span>
-            <h3>Public hospital expansion opening in 2026.</h3>
-            <p>
-              The current collateral outlines 233 beds, intensive care, maternity services,
-              additional operating theatres and endoscopy suites.
-            </p>
-          </div>
-        </article>
-      </div>
-
-      <div class="nightingale-data-band">
-        <article>
-          <strong>53,000</strong>
-          <span>current city population stated in the information memorandum</span>
-        </article>
-        <article>
-          <strong>$19B</strong>
-          <span>investment to date stated in the information memorandum</span>
-        </article>
-        <article>
-          <strong>12</strong>
-          <span>established private and public schools</span>
-        </article>
-        <article>
-          <strong>81 beds</strong>
-          <span>Quest serviced apartment offering within Health City</span>
-        </article>
-      </div>
-
-      <div class="nightingale-sales-layout">
-        <div class="nightingale-sales-copy">
-          <span class="eyebrow">Why this should be a priority</span>
-          <h3>Doctors do not need more brochure text. They need a fast visual reason to act.</h3>
-          <p>
-            The sales journey should quickly connect professional opportunity with family lifestyle:
-            Mater Hospital, a large regional catchment, university and TAFE access, 12 schools,
-            major shopping, parklands, senior living and strong transport connectivity.
-          </p>
-
-          <div class="doctor-journey-grid">
-            <article class="doctor-journey-card">
-              <span>01</span>
-              <h4>Practice growth</h4>
-              <p>Show catchment size, hospital proximity, referral potential and future health demand.</p>
-            </article>
-
-            <article class="doctor-journey-card">
-              <span>02</span>
-              <h4>Clinical flexibility</h4>
-              <p>Present suite sizes, custom layouts, parking and suitability for clinical and R&amp;D uses.</p>
-            </article>
-
-            <article class="doctor-journey-card">
-              <span>03</span>
-              <h4>Family confidence</h4>
-              <p>Show schools, childcare, university, shopping, parklands and premium residential options.</p>
-            </article>
-
-            <article class="doctor-journey-card">
-              <span>04</span>
-              <h4>Immediate action</h4>
-              <p>Offer a private presentation, interstate video call, inspection or direct sales contact.</p>
-            </article>
-          </div>
-        </div>
-
-        <aside class="nightingale-sales-panel">
-          <span class="eyebrow">Current availability examples</span>
-          <h3>Suites from 56m² to 135m² are shown as available in the July 2026 collateral.</h3>
-
-          <div class="nightingale-suite-list">
-            <div><span>Suite 308</span><strong>56m² · $806,400*</strong></div>
-            <div><span>Suite 207 / 307 / 407</span><strong>84m² · $1,134,000*</strong></div>
-            <div><span>Suite 210 / 310 / 410</span><strong>97m² · $1,309,500*</strong></div>
-            <div><span>Suite 201 / 301 / 401</span><strong>106m² · $1,431,000*</strong></div>
-            <div><span>Suite 206 / 306 / 406</span><strong>120m² · $1,620,000*</strong></div>
-            <div><span>Suite 409</span><strong>135m² · $1,822,500*</strong></div>
-          </div>
-
-          <p class="nightingale-price-note">
-            *Prices shown exclude GST and reflect the uploaded July 2026 information memorandum.
-            Availability and pricing must be confirmed by the sales team before publication.
-          </p>
-
-          <form class="nightingale-quick-form" id="nightingaleQuickForm">
-            <input id="nightingaleEmail" type="email" placeholder="Doctor or practice email" required>
-            <button type="submit">Request private presentation</button>
-          </form>
-
-          <p class="nightingale-form-message" id="nightingaleFormMessage"></p>
-        </aside>
-      </div>
-    </div>
-  </section>
-
-  <section class="section" id="featured">
+<section class="section" id="featured">
     <div class="container" id="featuredContainer">
       <div class="head" id="featuredHead">
         <div>
@@ -5032,6 +5132,7 @@ body.theme-clinic #nightingale .nightingale-journey,
       <div class="grid" id="cards"></div>
     </div>
   </section>
+
 
   <section class="immersive" id="immersiveSection">
     <div class="container immersivegrid" id="immersiveGrid">
@@ -5638,6 +5739,62 @@ const heroVisualLayouts = {
     `,
 };
 
+
+const heroFactContent = {
+    jobs: [
+        {
+            value: 'Growing',
+            label: 'medical, specialist, nursing and allied-health pathways'
+        },
+        {
+            value: 'Mater',
+            label: 'hospital and clinical opportunities within Health City'
+        },
+        {
+            value: 'Research',
+            label: 'education, innovation and professional collaboration'
+        },
+        {
+            value: 'Connected',
+            label: 'transport, schools and lifestyle supporting relocation'
+        }
+    ]
+};
+
+function renderHeroFacts(audienceKey) {
+    const container =
+        document.getElementById('heroFacts');
+
+    if (!container) {
+        return;
+    }
+
+    container.replaceChildren();
+
+    const facts =
+        heroFactContent[audienceKey] || [];
+
+    facts.forEach((fact) => {
+        const item =
+            document.createElement('article');
+
+        item.className = 'hero-fact';
+
+        const value =
+            document.createElement('strong');
+
+        value.textContent = fact.value;
+
+        const label =
+            document.createElement('span');
+
+        label.textContent = fact.label;
+
+        item.append(value, label);
+        container.appendChild(item);
+    });
+}
+
 function renderHeroVisual(audienceKey) {
     const visual = document.getElementById('heroVisual');
     const renderer = heroVisualLayouts[audienceKey] || heroVisualLayouts.general;
@@ -6129,6 +6286,7 @@ function applyPageContent(audienceKey, visitorRequest = '', matchedTerms = []) {
     renderAudienceVisuals(activeAudience);
     renderStats(activeAudience);
     renderHeroVisual(activeAudience);
+    renderHeroFacts(activeAudience);
     applyAudienceLayoutCopy(activeAudience);
     positionPrioritySections(activeAudience);
 
@@ -6146,123 +6304,33 @@ function applyPageContent(audienceKey, visitorRequest = '', matchedTerms = []) {
 }
 
 function positionPrioritySections(activeAudience) {
-    const dynamicExperience = document.getElementById('dynamicExperience');
-    const hero = document.getElementById('hero');
-    const stats = document.getElementById('statsSection');
-    const nightingale = document.getElementById('nightingale');
+    const hero =
+        document.getElementById('hero');
 
-    if (!dynamicExperience || !hero || !stats || !nightingale) {
+    const nightingale =
+        document.getElementById('nightingale');
+
+    if (!hero || !nightingale) {
         return;
     }
 
-    const shouldShowNightingale =
+    hero.style.display = 'flex';
+
+    const showNightingale =
         activeAudience === 'jobs' ||
         activeAudience === 'clinic';
 
-    if (shouldShowNightingale) {
-        updateNightingaleHero(activeAudience);
-
-        nightingale.style.display = 'block';
-        nightingale.style.visibility = 'visible';
-        nightingale.style.opacity = '1';
-
-        hero.style.display = 'none';
-
-        dynamicExperience.prepend(nightingale);
-
-        window.requestAnimationFrame(() => {
-            nightingale.scrollIntoView({
-                block: 'start',
-                behavior: 'smooth'
-            });
-        });
-
-        return;
-    }
-
-    nightingale.style.display = 'none';
-    hero.style.display = 'flex';
-
-    if (nightingale.previousElementSibling !== stats) {
-        stats.insertAdjacentElement('afterend', nightingale);
-    }
+    nightingale.style.display =
+        showNightingale
+            ? 'flex'
+            : 'none';
 }
 
 
 function updateNightingaleHero(activeAudience) {
-    const eyebrow = document.getElementById('nightingaleEyebrow');
-    const title = document.getElementById('nightingaleTitle');
-    const description = document.getElementById('nightingaleDescription');
-    const primaryLink = document.getElementById('nightingalePrimaryLink');
-    const secondaryLink = document.getElementById('nightingaleSecondaryLink');
-    const badgeTitle = document.getElementById('nightingaleBadgeTitle');
-    const badgeText = document.getElementById('nightingaleBadgeText');
-
-    if (!title || !description) {
-        return;
-    }
-
-    if (activeAudience === 'clinic') {
-        if (eyebrow) {
-            eyebrow.textContent =
-                'Nightingale Specialist Suites · Springfield Health City';
-        }
-        title.textContent = 'Open your specialist clinic beside Mater Hospital Springfield.';
-        description.textContent =
-            'Explore purpose-built consulting suites, flexible clinical layouts, on-site parking and a large regional patient catchment within Springfield Health City.';
-
-        if (primaryLink) {
-            primaryLink.textContent = 'Explore Nightingale suites';
-            primaryLink.href =
-                'https://www.springfieldcity.com.au/our-precincts/health/nightingale/';
-        }
-
-        if (secondaryLink) {
-            secondaryLink.textContent = 'View current property listing';
-            secondaryLink.href =
-                'https://www.realcommercial.com.au/for-sale/property-nightingale-specialist-suites-lot-32-health-care-drive-springfield-central-qld-4300-504254164';
-        }
-
-        if (badgeTitle) {
-            badgeTitle.textContent = 'Clinic establishment and suite ownership';
-        }
-
-        if (badgeText) {
-            badgeText.textContent =
-                'Freehold specialist suites, flexible clinical uses, stated on-site parking and direct access to the wider Health City ecosystem.';
-        }
-
-        return;
-    }
-
-    if (eyebrow) {
-        eyebrow.textContent =
-            'Medical careers in Springfield Health City';
-    }
-    title.textContent = 'Build your medical career in Springfield Health City.';
-    description.textContent =
-        'Explore medical, specialist, nursing and allied-health career pathways in a growing health precinct directly opposite Mater Hospital Springfield.';
-
-    if (primaryLink) {
-        primaryLink.textContent = 'View Mater careers';
-        primaryLink.href = 'https://careers.mater.org.au/';
-    }
-
-    if (secondaryLink) {
-        secondaryLink.textContent = 'Explore Health City';
-        secondaryLink.href =
-            'https://www.springfieldcity.com.au/our-precincts/health/';
-    }
-
-    if (badgeTitle) {
-        badgeTitle.textContent = 'Medical careers and professional growth';
-    }
-
-    if (badgeText) {
-        badgeText.textContent =
-            'Explore recognised healthcare employers, specialist pathways and the professional environment surrounding Mater Hospital Springfield.';
-    }
+    return activeAudience;
 }
+
 
 function renderTags(defaultTags, visitorRequest, matchedTerms) {
     const container = document.getElementById('tags');
