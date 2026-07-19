@@ -901,6 +901,380 @@
     }
 }
 
+
+/* =========================================================
+   EDITORIAL VIDEO STORIES
+   Videos are distributed through the project narrative rather
+   than presented as one large video library.
+   ========================================================= */
+
+.video-story {
+    padding: 92px 0;
+    overflow: hidden;
+}
+
+.video-story.dark {
+    color: #ffffff;
+    background: var(--navy);
+}
+
+.video-story.light {
+    color: var(--text);
+    background: #ffffff;
+}
+
+.video-story.soft {
+    color: var(--text);
+    background: #eaf0f2;
+}
+
+.video-story-grid {
+    display: grid;
+    grid-template-columns:
+        minmax(0, .9fr)
+        minmax(260px, .46fr)
+        minmax(260px, .46fr);
+    align-items: center;
+    gap: clamp(24px, 3vw, 48px);
+}
+
+.video-story.reverse .video-story-copy {
+    order: 3;
+}
+
+.video-story.reverse .video-story-card:first-of-type {
+    order: 1;
+}
+
+.video-story.reverse .video-story-card:last-of-type {
+    order: 2;
+}
+
+.video-story-copy {
+    max-width: 720px;
+}
+
+.video-story-copy h2 {
+    margin-bottom: 16px;
+    font-size: clamp(2.8rem, 4.8vw, 5.3rem);
+    letter-spacing: -.055em;
+}
+
+.video-story-copy p {
+    line-height: 1.7;
+}
+
+.video-story.dark .video-story-copy p {
+    color: #c8d8df;
+}
+
+.video-story.light .video-story-copy p,
+.video-story.soft .video-story-copy p {
+    color: var(--muted);
+}
+
+.video-story-points {
+    display: grid;
+    gap: 12px;
+    margin-top: 26px;
+}
+
+.video-story-point {
+    display: grid;
+    grid-template-columns: 34px 1fr;
+    gap: 12px;
+    align-items: start;
+}
+
+.video-story-point span:first-child {
+    display: grid;
+    place-items: center;
+    width: 34px;
+    height: 34px;
+    border-radius: 11px;
+    color: var(--navy);
+    background: var(--gold);
+    font-weight: 900;
+}
+
+.video-story-point strong,
+.video-story-point small {
+    display: block;
+}
+
+.video-story-point small {
+    margin-top: 3px;
+    line-height: 1.45;
+}
+
+.video-story.dark .video-story-point small {
+    color: #bdd0d8;
+}
+
+.video-story.light .video-story-point small,
+.video-story.soft .video-story-point small {
+    color: var(--muted);
+}
+
+.video-story-card {
+    position: relative;
+    width: 100%;
+    max-width: 390px;
+    justify-self: center;
+    overflow: hidden;
+    border-radius: 28px;
+    aspect-ratio: 9 / 16;
+    background: var(--navy-soft);
+    box-shadow: 0 25px 65px rgba(3, 29, 43, .2);
+}
+
+.video-story-card video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.video-story-card::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background:
+        linear-gradient(
+            180deg,
+            transparent 58%,
+            rgba(2, 18, 28, .76)
+        );
+}
+
+.video-story-label {
+    position: absolute;
+    z-index: 2;
+    right: 15px;
+    bottom: 15px;
+    left: 15px;
+    padding: 11px 13px;
+    border: 1px solid rgba(255,255,255,.14);
+    border-radius: 13px;
+    color: #ffffff;
+    background: rgba(3,29,43,.7);
+    backdrop-filter: blur(10px);
+    font-size: .78rem;
+    font-weight: 700;
+}
+
+@media (max-width: 1100px) {
+    .video-story-grid,
+    .video-story.reverse .video-story-grid {
+        grid-template-columns: minmax(0, 1fr) minmax(240px, .55fr);
+    }
+
+    .video-story-copy,
+    .video-story.reverse .video-story-copy {
+        order: 1;
+        grid-column: 1 / -1;
+        max-width: 900px;
+    }
+
+    .video-story-card,
+    .video-story.reverse .video-story-card:first-of-type,
+    .video-story.reverse .video-story-card:last-of-type {
+        order: initial;
+    }
+}
+
+@media (max-width: 720px) {
+    .video-story {
+        padding: 68px 0;
+    }
+
+    .video-story-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .video-story-copy {
+        grid-column: auto;
+    }
+
+    .video-story-card {
+        width: min(100%, 410px);
+    }
+}
+
+
+/* =========================================================
+   STABLE VIDEO STORY LAYOUT
+   Every video section uses the same reliable structure:
+   1. Full-width copy
+   2. Two vertical videos below
+   This removes the unstable left/right/reverse arrangements.
+   ========================================================= */
+
+.video-story {
+    padding: 88px 0;
+}
+
+.video-story .container {
+    width: min(92%, 1500px);
+}
+
+.video-story-grid,
+.video-story.reverse .video-story-grid {
+    display: grid;
+    grid-template-columns:
+        repeat(2, minmax(280px, 390px));
+    grid-template-areas:
+        "copy copy"
+        "video-one video-two";
+    justify-content: center;
+    align-items: start;
+    column-gap: clamp(24px, 3vw, 44px);
+    row-gap: 38px;
+}
+
+/* Text always appears first and uses the full section width. */
+.video-story-copy,
+.video-story.reverse .video-story-copy,
+.video-story:not(.reverse) .video-story-copy {
+    grid-area: copy;
+    order: initial;
+    width: 100%;
+    max-width: 980px;
+    justify-self: center;
+    padding: 0;
+    text-align: center;
+}
+
+.video-story-copy h2 {
+    max-width: 920px;
+    margin: 0 auto 18px;
+    font-size: clamp(2.9rem, 4.6vw, 5.1rem);
+    line-height: 1;
+    letter-spacing: -.052em;
+    text-wrap: balance;
+}
+
+.video-story-copy p {
+    max-width: 760px;
+    margin: 0 auto;
+    font-size: 1.02rem;
+    line-height: 1.72;
+}
+
+.video-story-points {
+    width: min(100%, 820px);
+    margin: 30px auto 0;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 14px;
+    text-align: left;
+}
+
+.video-story-point {
+    min-width: 0;
+    padding: 16px;
+    border-radius: 18px;
+}
+
+.video-story.dark .video-story-point {
+    border: 1px solid rgba(255,255,255,.11);
+    background: rgba(255,255,255,.05);
+}
+
+.video-story.light .video-story-point,
+.video-story.soft .video-story-point {
+    border: 1px solid var(--line);
+    background: rgba(255,255,255,.72);
+}
+
+/* Videos always sit side-by-side below the copy. */
+.video-story-card,
+.video-story.reverse .video-story-card,
+.video-story:not(.reverse) .video-story-card {
+    width: 100%;
+    max-width: 390px;
+    justify-self: center;
+    order: initial;
+    transform: none !important;
+}
+
+.video-story-card:first-of-type,
+.video-story.reverse .video-story-card:first-of-type,
+.video-story:not(.reverse) .video-story-card:first-of-type {
+    grid-area: video-one;
+}
+
+.video-story-card:last-of-type,
+.video-story.reverse .video-story-card:last-of-type,
+.video-story:not(.reverse) .video-story-card:last-of-type {
+    grid-area: video-two;
+}
+
+/* Keep labels readable but compact. */
+.video-story-label {
+    right: 14px;
+    bottom: 14px;
+    left: 14px;
+    padding: 10px 12px;
+}
+
+/* Tablet */
+@media (max-width: 900px) {
+    .video-story-grid,
+    .video-story.reverse .video-story-grid {
+        grid-template-columns:
+            repeat(2, minmax(240px, 340px));
+        column-gap: 20px;
+        row-gap: 30px;
+    }
+
+    .video-story-copy h2 {
+        font-size: clamp(2.7rem, 7vw, 4.4rem);
+    }
+
+    .video-story-points {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Mobile */
+@media (max-width: 620px) {
+    .video-story {
+        padding: 66px 0;
+    }
+
+    .video-story .container {
+        width: calc(100% - 28px);
+    }
+
+    .video-story-grid,
+    .video-story.reverse .video-story-grid {
+        grid-template-columns: 1fr;
+        grid-template-areas:
+            "copy"
+            "video-one"
+            "video-two";
+        row-gap: 22px;
+    }
+
+    .video-story-copy {
+        text-align: left;
+    }
+
+    .video-story-copy h2,
+    .video-story-copy p {
+        margin-left: 0;
+        margin-right: 0;
+    }
+
+    .video-story-card {
+        width: min(100%, 390px);
+    }
+
+    .video-story-copy h2 {
+        font-size: clamp(2.5rem, 12vw, 3.9rem);
+    }
+}
+
 </style>
 </head>
 
@@ -928,7 +1302,7 @@
                 <a href="#health-city-growth">Health City</a>
                 <a href="#availability">Suites</a>
                 <a href="#gallery">Gallery</a>
-                <a href="#videos">Videos</a>
+                <a href="#project-stories">Stories</a>
                 <a href="#lifestyle">Lifestyle</a>
                 <a href="#contact">Contact</a>
             </div>
@@ -1079,6 +1453,57 @@
         </div>
     </section>
 
+    <section class="video-story dark" id="project-stories">
+        <div class="container video-story-grid">
+            <div class="video-story-copy">
+                <span class="eyebrow">Project vision</span>
+
+                <h2>
+                    See the development before reading the detail.
+                </h2>
+
+                <p>
+                    Short vertical stories introduce Nightingale’s architecture,
+                    specialist positioning and Health City setting in a format
+                    designed for busy medical professionals.
+                </p>
+
+                <div class="video-story-points">
+                    <div class="video-story-point">
+                        <span>1</span>
+                        <div>
+                            <strong>Immediate project understanding</strong>
+                            <small>Show the building, arrival experience and professional identity within seconds.</small>
+                        </div>
+                    </div>
+
+                    <div class="video-story-point">
+                        <span>2</span>
+                        <div>
+                            <strong>Built for mobile discovery</strong>
+                            <small>Vertical content can move naturally between the website, LinkedIn and targeted campaigns.</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <article class="video-story-card">
+                <video autoplay muted loop playsinline preload="metadata">
+                    <source src="assets/nightingale-video-01.mp4" type="video/mp4">
+                </video>
+                <div class="video-story-label">Nightingale project overview</div>
+            </article>
+
+            <article class="video-story-card">
+                <video autoplay muted loop playsinline preload="metadata">
+                    <source src="assets/nightingale-video-02.mp4" type="video/mp4">
+                </video>
+                <div class="video-story-label">Architecture and arrival experience</div>
+            </article>
+        </div>
+    </section>
+
+
     <section class="health-expansion" id="health-city-growth">
         <div class="container health-expansion-grid">
             <div class="health-expansion-copy">
@@ -1125,6 +1550,57 @@
             </div>
         </div>
     </section>
+
+    <section class="video-story light reverse">
+        <div class="container video-story-grid">
+            <div class="video-story-copy">
+                <span class="eyebrow">Health City connection</span>
+
+                <h2>
+                    Position the practice within a larger medical ecosystem.
+                </h2>
+
+                <p>
+                    These stories connect Nightingale to Mater Hospital,
+                    healthcare expansion, professional collaboration and the
+                    surrounding regional patient catchment.
+                </p>
+
+                <div class="video-story-points">
+                    <div class="video-story-point">
+                        <span>+</span>
+                        <div>
+                            <strong>Direct hospital proximity</strong>
+                            <small>Communicate the position opposite Mater Hospital Springfield visually.</small>
+                        </div>
+                    </div>
+
+                    <div class="video-story-point">
+                        <span>↗</span>
+                        <div>
+                            <strong>Future healthcare demand</strong>
+                            <small>Show how hospital growth and population expansion support specialist services.</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <article class="video-story-card">
+                <video autoplay muted loop playsinline preload="metadata">
+                    <source src="assets/nightingale-video-03.mp4" type="video/mp4">
+                </video>
+                <div class="video-story-label">Mater Hospital connection</div>
+            </article>
+
+            <article class="video-story-card">
+                <video autoplay muted loop playsinline preload="metadata">
+                    <source src="assets/nightingale-video-04.mp4" type="video/mp4">
+                </video>
+                <div class="video-story-label">Health City growth and catchment</div>
+            </article>
+        </div>
+    </section>
+
 
     <section class="availability-section" id="availability">
         <div class="container availability-layout">
@@ -1203,6 +1679,57 @@
         </div>
     </section>
 
+    <section class="video-story soft">
+        <div class="container video-story-grid">
+            <div class="video-story-copy">
+                <span class="eyebrow">Inside the opportunity</span>
+
+                <h2>
+                    Move from interest to a practical clinic decision.
+                </h2>
+
+                <p>
+                    Suite-focused video can explain flexible layouts, access,
+                    parking and ownership options without asking specialists to
+                    work through a long brochure first.
+                </p>
+
+                <div class="video-story-points">
+                    <div class="video-story-point">
+                        <span>50</span>
+                        <div>
+                            <strong>Suites from approximately 50m²</strong>
+                            <small>Present different practice sizes and configurations clearly.</small>
+                        </div>
+                    </div>
+
+                    <div class="video-story-point">
+                        <span>P</span>
+                        <div>
+                            <strong>More than 120 stated car parks</strong>
+                            <small>Make patient and practitioner access part of the visual sales story.</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <article class="video-story-card">
+                <video autoplay muted loop playsinline preload="metadata">
+                    <source src="assets/nightingale-video-05.mp4" type="video/mp4">
+                </video>
+                <div class="video-story-label">Specialist-suite configurations</div>
+            </article>
+
+            <article class="video-story-card">
+                <video autoplay muted loop playsinline preload="metadata">
+                    <source src="assets/nightingale-video-06.mp4" type="video/mp4">
+                </video>
+                <div class="video-story-label">Access, parking and patient arrival</div>
+            </article>
+        </div>
+    </section>
+
+
     <section class="lifestyle-section" id="lifestyle">
         <div class="container">
             <div class="section-heading">
@@ -1263,6 +1790,57 @@
         </div>
     </section>
 
+    <section class="video-story dark reverse">
+        <div class="container video-story-grid">
+            <div class="video-story-copy">
+                <span class="eyebrow">Life beyond the practice</span>
+
+                <h2>
+                    Show specialists what relocation could feel like.
+                </h2>
+
+                <p>
+                    The final stories connect professional opportunity with
+                    schools, childcare, education, shopping, parklands,
+                    residential communities and Brookwater’s golf lifestyle.
+                </p>
+
+                <div class="video-story-points">
+                    <div class="video-story-point">
+                        <span>12</span>
+                        <div>
+                            <strong>Established school options</strong>
+                            <small>Support the family decision alongside the professional decision.</small>
+                        </div>
+                    </div>
+
+                    <div class="video-story-point">
+                        <span>⌂</span>
+                        <div>
+                            <strong>A connected everyday lifestyle</strong>
+                            <small>Present transport, shopping, parklands and residential choices visually.</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <article class="video-story-card">
+                <video autoplay muted loop playsinline preload="metadata">
+                    <source src="assets/nightingale-video-07.mp4" type="video/mp4">
+                </video>
+                <div class="video-story-label">Education, family and community</div>
+            </article>
+
+            <article class="video-story-card">
+                <video autoplay muted loop playsinline preload="metadata">
+                    <source src="assets/nightingale-video-08.mp4" type="video/mp4">
+                </video>
+                <div class="video-story-label">Springfield and Brookwater lifestyle</div>
+            </article>
+        </div>
+    </section>
+
+
     <section class="section" id="gallery">
         <div class="container">
             <div class="section-heading">
@@ -1322,80 +1900,6 @@
         </div>
     </section>
 
-    <section class="section video-section" id="videos">
-        <div class="container">
-            <div class="section-heading">
-                <span class="eyebrow">Project videos</span>
-
-                <h2>
-                    Explore Nightingale through short vertical stories.
-                </h2>
-
-                <p>
-                    All videos autoplay silently, loop continuously and remain
-                    part of the page without play buttons or controls.
-                </p>
-            </div>
-
-            <div class="vertical-video-grid">
-                <article class="vertical-video-card">
-                    <video autoplay muted loop playsinline preload="metadata">
-                        <source src="assets/nightingale-video-01.mp4" type="video/mp4">
-                    </video>
-                    <div class="vertical-video-label">Nightingale overview</div>
-                </article>
-
-                <article class="vertical-video-card">
-                    <video autoplay muted loop playsinline preload="metadata">
-                        <source src="assets/nightingale-video-02.mp4" type="video/mp4">
-                    </video>
-                    <div class="vertical-video-label">Health City location</div>
-                </article>
-
-                <article class="vertical-video-card">
-                    <video autoplay muted loop playsinline preload="metadata">
-                        <source src="assets/nightingale-video-03.mp4" type="video/mp4">
-                    </video>
-                    <div class="vertical-video-label">Specialist-suite opportunity</div>
-                </article>
-
-                <article class="vertical-video-card">
-                    <video autoplay muted loop playsinline preload="metadata">
-                        <source src="assets/nightingale-video-04.mp4" type="video/mp4">
-                    </video>
-                    <div class="vertical-video-label">Mater Hospital connection</div>
-                </article>
-
-                <article class="vertical-video-card">
-                    <video autoplay muted loop playsinline preload="metadata">
-                        <source src="assets/nightingale-video-05.mp4" type="video/mp4">
-                    </video>
-                    <div class="vertical-video-label">Practice and patient access</div>
-                </article>
-
-                <article class="vertical-video-card">
-                    <video autoplay muted loop playsinline preload="metadata">
-                        <source src="assets/nightingale-video-06.mp4" type="video/mp4">
-                    </video>
-                    <div class="vertical-video-label">Springfield lifestyle</div>
-                </article>
-
-                <article class="vertical-video-card">
-                    <video autoplay muted loop playsinline preload="metadata">
-                        <source src="assets/nightingale-video-07.mp4" type="video/mp4">
-                    </video>
-                    <div class="vertical-video-label">Education and research</div>
-                </article>
-
-                <article class="vertical-video-card">
-                    <video autoplay muted loop playsinline preload="metadata">
-                        <source src="assets/nightingale-video-08.mp4" type="video/mp4">
-                    </video>
-                    <div class="vertical-video-label">Project progress</div>
-                </article>
-            </div>
-        </div>
-    </section>
 
     <section class="section" id="opportunity">
         <div class="container">
@@ -1570,7 +2074,7 @@
             );
 
         document
-            .querySelectorAll(".vertical-video-card video")
+            .querySelectorAll(".video-story-card video, .vertical-video-card video")
             .forEach((video) => {
                 videoObserver.observe(video);
             });
